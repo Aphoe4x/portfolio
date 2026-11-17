@@ -3,355 +3,650 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Afolabi Abdulbasit Opeyemi | Software Engineer</title>
-<meta name="description" content="Backend and full-stack developer in Lagos. I build web products with PHP, Laravel and Node.js, and a few side projects that got out of hand." />
-<meta name="theme-color" content="#0b0a09" />
+<title>Afolabi Abdulbasit Opeyemi | Backend and full-stack developer</title>
+<meta name="description" content="Backend and full-stack developer in Lagos. I build web products with PHP, Laravel and Node.js, plus a few side projects that got out of hand." />
+<meta name="theme-color" content="#0a0a0a" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://api.fontshare.com" />
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script>document.documentElement.classList.add('is-loading');setTimeout(function(){document.documentElement.classList.remove('is-loading')},4200);</script>
 <script src="main.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="scene" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-mark"><span class="pulse"></span> aphoe</span>
+    <span class="loader-count" id="loader-count">000</span>
+    <span class="loader-bar"><span id="loader-bar"></span></span>
+  </div>
+</div>
 
-<header class="masthead" id="masthead">
-  <a class="brand" href="#top" aria-label="Aphoe, back to top">
-    <span>aphoe</span><span class="brand-dot" aria-hidden="true"></span>
-  </a>
+<aside class="side" aria-label="Site">
+  <div class="side-head">
+    <a class="side-mark" href="#home">
+      <span class="pulse" aria-hidden="true"></span>
+      <span>aphoe</span>
+    </a>
+    <p class="side-role">backend &amp; full-stack developer</p>
+    <p class="side-note">building web products that stay shipped, and a card game that got completely out of hand.</p>
+  </div>
 
-  <nav class="nav" aria-label="Sections">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
+  <div class="side-tile" aria-hidden="true">
+    <div class="mini-hand">
+      <span class="mini-card" style="--r: -10deg; --x: -38px; --y: 8px">1</span>
+      <span class="mini-card" style="--r: 0deg; --x: 0px; --y: -2px">5</span>
+      <span class="mini-card is-amber" style="--r: 10deg; --x: 38px; --y: 8px">20</span>
+    </div>
+    <p class="tile-foot"><span class="pulse" aria-hidden="true"></span> Lagos <span id="clock">--:--</span></p>
+  </div>
+
+  <nav class="rail" aria-label="Sections">
+    <a class="rail-item is-active" href="#home">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">01</span>
+      <span class="rail-text">home</span>
+    </a>
+    <a class="rail-item" href="#work">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">02</span>
+      <span class="rail-text">work</span>
+    </a>
+    <a class="rail-item" href="#about">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">03</span>
+      <span class="rail-text">about</span>
+    </a>
+    <a class="rail-item" href="#experience">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">04</span>
+      <span class="rail-text">experience</span>
+    </a>
+    <a class="rail-item" href="#skills">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">05</span>
+      <span class="rail-text">skills</span>
+    </a>
+    <a class="rail-item" href="#contact">
+      <span class="rail-dot" aria-hidden="true"></span>
+      <span class="rail-num">06</span>
+      <span class="rail-text">say hi</span>
+    </a>
   </nav>
 
-  <div class="masthead-actions">
-    <button class="shuffle-btn" id="shuffle" type="button" aria-label="Shuffle the deck">
-      <svg class="shuffle-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 7h3.5c1.2 0 2.2.6 2.9 1.6l5.2 7.8c.6 1 1.7 1.6 2.9 1.6H21" />
-        <path d="M3 17h3.5c1.2 0 2.2-.6 2.9-1.6l5.2-7.8C15.2 6.6 16.3 6 17.5 6H21" />
-        <path d="M18 3l3 3-3 3M18 15l3 3-3 3" />
-      </svg>
-      <span class="shuffle-label">Shuffle</span>
-    </button>
-    <a class="pill" href="#contact">Contact</a>
+  <div class="side-connect">
+    <p class="side-label">let's connect</p>
+    <ul class="socials">
+      <li>
+        <a href="https://github.com/Aphoe4x" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="https://x.com/aphoooe" aria-label="X" title="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 2h3.3l-7.2 8.2L22.8 22h-6.6l-5.2-6.8L4.9 22H1.6l7.7-8.8L1.2 2h6.8l4.7 6.2L18.2 2Zm-1.2 18h1.8L7.1 3.9H5.1L17 20Z"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="mailto:aphoe4x@gmail.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.6 6.6 8.4 6 8.4-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="https://aphoe4x.github.io/cv.pdf" aria-label="CV" title="CV">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+        </a>
+      </li>
+    </ul>
   </div>
-</header>
+</aside>
 
-<main id="main">
-  <section class="hero" id="top">
-    <p class="eyebrow reveal">
-      <span class="status-dot" aria-hidden="true"></span>
-      Lagos, Nigeria
-      <span class="eyebrow-slash">/</span>
-      Open to remote roles
-    </p>
+<main class="main" id="main">
+  <div class="pane">
+    <section class="hero" id="home">
+      <p class="eyebrow reveal" style="--i: 0">
+        <span class="pulse" aria-hidden="true"></span>
+        available for work
+        <span class="sep" aria-hidden="true">/</span>
+        Lagos, Nigeria
+      </p>
 
-    <div class="hand reveal" aria-hidden="true">
-      <div class="hand-card" style="--n: 0; --rot: -13deg; --x: -160%; --y: 16px">
-        <span class="card-corner"><b>A</b><i>&#9824;</i></span>
-        <span class="card-face">A</span>
-        <span class="card-corner card-corner--bottom"><b>A</b><i>&#9824;</i></span>
-      </div>
-      <div class="hand-card" style="--n: 1; --rot: -6.5deg; --x: -80%; --y: 6px">
-        <span class="card-corner"><b>P</b><i class="is-red">&#9829;</i></span>
-        <span class="card-face">P</span>
-        <span class="card-corner card-corner--bottom"><b>P</b><i class="is-red">&#9829;</i></span>
-      </div>
-      <div class="hand-card" style="--n: 2; --rot: 0deg; --x: 0%; --y: 0px">
-        <span class="card-corner"><b>H</b><i class="is-red">&#9830;</i></span>
-        <span class="card-face">H</span>
-        <span class="card-corner card-corner--bottom"><b>H</b><i class="is-red">&#9830;</i></span>
-      </div>
-      <div class="hand-card" style="--n: 3; --rot: 6.5deg; --x: 80%; --y: 6px">
-        <span class="card-corner"><b>O</b><i>&#9827;</i></span>
-        <span class="card-face">O</span>
-        <span class="card-corner card-corner--bottom"><b>O</b><i>&#9827;</i></span>
-      </div>
-      <div class="hand-card is-wild" style="--n: 4; --rot: 13deg; --x: 160%; --y: 16px">
-        <span class="card-corner"><b>20</b><i class="is-accent">&#9733;</i></span>
-        <span class="card-face">E</span>
-        <span class="card-tail">WHOT</span>
-        <span class="card-corner card-corner--bottom"><b>20</b><i class="is-accent">&#9733;</i></span>
-      </div>
-    </div>
-    <p class="hand-caption reveal">Five cards, every one a thing I shipped</p>
+      <h1 class="mega hero-name reveal" style="--i: 1">Abdulbasit</h1>
 
-    <h1 class="hero-title reveal">I build web products that <em>stay shipped</em>.</h1>
-    <p class="hero-identity reveal">Afolabi Abdulbasit Opeyemi</p>
-    <p class="hero-lede reveal">
-      Backend and full-stack developer. Three years of PHP, Laravel and Node.js in production. Live shops, booking systems, WordPress sites, and a card game with real rooms. Pick a card to see the work.
-    </p>
-    <div class="hero-actions reveal">
-      <a class="btn btn-solid" href="#work">Pick a card</a>
-      <a class="btn btn-ghost" href="mailto:aphoe4x@gmail.com">Deal me in</a>
-    </div>
-  </section>
-
-  <section class="section work" id="work">
-    <header class="section-head reveal">
-      <p class="section-tag"><span>01</span> Work</p>
-      <h2 class="section-title">Five cards. <em>Pick one up.</em></h2>
-      <p class="section-lede">Every card is live. Flip it for the stack, the code, and a way in.</p>
-    </header>
-
-    <div class="work-grid">
-      <article class="work-card">
-        <div class="card-tilt">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-whot" aria-labelledby="name-whot" aria-describedby="line-whot">
-                <span class="card-rank"><span>A</span><span class="card-suit is-accent">&#9733;</span></span>
-                <span class="card-body">
-                  <span class="card-name" id="name-whot">Whot</span>
-                  <span class="card-line" id="line-whot">Nigerian Whot with a rules engine, an AI table and realtime rooms.</span>
-                </span>
-                <span class="card-foot">
-                  <span class="card-stack">JavaScript, Node.js, Socket.IO, Docker</span>
-                  <span class="card-flip-hint">Flip for links</span>
-                </span>
-                <span class="card-watermark is-accent" aria-hidden="true">&#9733;</span>
-              </button>
-            </div>
-            <div class="flip-face flip-back" id="back-whot" inert>
-              <div class="back-top">
-                <img class="back-logo" src="assets/projects/whot.svg" alt="" width="46" height="46" loading="lazy" />
-                <div>
-                  <p class="back-kicker">Ace of stars</p>
-                  <h3 class="back-name">Whot</h3>
-                </div>
-              </div>
-              <p class="back-text">Play alone against the computer, or share a room code with a friend. The rules engine and room sync run on a Node.js server in Docker.</p>
-              <p class="back-stack">JavaScript, Node.js, Socket.IO, Docker</p>
-              <div class="back-actions">
-                <button class="back-btn is-accent" type="button" data-open-room="whot">Play here</button>
-                <a class="back-btn" href="https://github.com/Aphoe4x/whot" target="_blank" rel="noopener noreferrer">Code</a>
-              </div>
-              <button class="back-close" type="button">Flip back</button>
-            </div>
+      <div class="hero-body">
+        <div class="hero-lede">
+          <p class="manifesto reveal" style="--i: 2">
+            Backend and full-stack developer. I ship web products
+            <span class="hl">that stay shipped</span>, and a card game that got
+            <span class="ink">completely out of hand</span>.
+          </p>
+          <div class="hero-meta reveal" style="--i: 3">
+            <p class="hero-fullname">Afolabi Abdulbasit Opeyemi</p>
+            <p class="hero-sub">PHP, Laravel and Node.js. Three years in production.</p>
           </div>
         </div>
-      </article>
 
-      <article class="work-card">
-        <div class="card-tilt">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-ziki" aria-labelledby="name-ziki" aria-describedby="line-ziki">
-                <span class="card-rank"><span>K</span><span class="card-suit is-red">&#9829;</span></span>
-                <span class="card-body">
+        <figure class="hero-hand reveal" style="--i: 3">
+          <div class="fan" id="fan" aria-hidden="true">
+            <span class="fan-card" style="--i: 0" data-corner="A♠"><span class="fan-face"><b>A</b><i>♠</i></span></span>
+            <span class="fan-card" style="--i: 1" data-corner="P♥"><span class="fan-face"><b>P</b><i>♥</i></span></span>
+            <span class="fan-card" style="--i: 2" data-corner="H♦"><span class="fan-face"><b>H</b><i>♦</i></span></span>
+            <span class="fan-card" style="--i: 3" data-corner="O♣"><span class="fan-face"><b>O</b><i>♣</i></span></span>
+            <span class="fan-card is-wild" style="--i: 4" data-corner="E★"><span class="fan-face"><b>E</b><i>★</i></span></span>
+          </div>
+          <figcaption class="hand-caption">five cards, every one a thing I shipped</figcaption>
+        </figure>
+      </div>
+
+      <div class="hero-foot">
+        <div class="foot-block reveal" style="--i: 4">
+          <p class="label">currently</p>
+          <h2 class="foot-title">Shipping Ziki, and losing at Whot.</h2>
+          <p class="foot-text">
+            HNG15 finalist. Open to remote backend and full-stack work with teams that care about the unglamorous parts.
+          </p>
+          <div class="foot-actions">
+            <a class="btn btn-dark" href="#work">
+              Pick a card
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4v15m0 0-6-6m6 6 6-6"/></svg>
+            </a>
+            <a class="btn btn-line" href="mailto:aphoe4x@gmail.com">Email me</a>
+          </div>
+        </div>
+
+        <div class="foot-block reveal" style="--i: 5">
+          <p class="label">the stack</p>
+          <ul class="stack-list">
+            <li><span class="stack-key">Backend</span><span class="stack-val">PHP, Laravel, Node.js</span></li>
+            <li><span class="stack-key">Data</span><span class="stack-val">MySQL, PostgreSQL</span></li>
+            <li><span class="stack-key">Frontend</span><span class="stack-val">React, Next.js, Tailwind</span></li>
+            <li><span class="stack-key">Ship</span><span class="stack-val">Docker, Render, Vercel</span></li>
+          </ul>
+          <span class="pill-amber">3+ years in production</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="work">
+      <h2 class="mega reveal">Work</h2>
+      <div class="block-head reveal" style="--i: 1">
+        <p class="label">projects</p>
+        <button class="shuffle" id="shuffle" type="button">
+          shuffle
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 7h3.5c1.2 0 2.2.6 2.9 1.6l5.2 7.8c.6 1 1.7 1.6 2.9 1.6H21" />
+            <path d="M3 17h3.5c1.2 0 2.2-.6 2.9-1.6l5.2-7.8C15.2 6.6 16.3 6 17.5 6H21" />
+            <path d="M18 3l3 3-3 3M18 15l3 3-3 3" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="work-grid">
+        <article class="work-card work-card--wide reveal" style="--i: 0">
+          <div class="card-tilt">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-whot" aria-labelledby="name-whot" aria-describedby="line-whot">
+                  <span class="card-rule" aria-hidden="true"></span>
+                  <span class="card-main">
+                    <span class="card-top">
+                      <span class="card-id"><span class="card-num">01</span><span class="card-suit is-amber" aria-hidden="true">★</span></span>
+                      <span class="card-live">live ↗</span>
+                    </span>
+                    <span class="card-name" id="name-whot">Whot</span>
+                    <span class="card-line" id="line-whot">Nigerian Whot with a rules engine, an AI table and realtime rooms. Play it right here.</span>
+                    <span class="card-tags">
+                      <span>JavaScript</span><span>Node.js</span><span>Socket.IO</span><span>Docker</span>
+                    </span>
+                    <span class="card-hint">flip for links ↻</span>
+                  </span>
+                  <span class="card-figure" aria-hidden="true">
+                    <span class="mini-hand mini-hand--lg">
+                      <span class="mini-card" style="--r: -12deg; --x: -42px; --y: 10px">1</span>
+                      <span class="mini-card" style="--r: 0deg; --x: 0px; --y: -4px">15</span>
+                      <span class="mini-card is-amber" style="--r: 12deg; --x: 42px; --y: 10px">20</span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+              <div class="flip-face flip-back" id="back-whot" inert>
+                <div class="back-top">
+                  <img class="back-logo" src="assets/projects/whot.svg" alt="" width="40" height="40" loading="lazy" />
+                  <div>
+                    <p class="back-kicker">ace of stars</p>
+                    <h3 class="back-name">Whot</h3>
+                  </div>
+                </div>
+                <p class="back-text">Rooms by code, an AI opponent, and a rules engine with automated tests. The server runs on Node.js and Socket.IO, shipped in Docker.</p>
+                <p class="back-stack">JavaScript, Node.js, Socket.IO, Docker</p>
+                <div class="back-actions">
+                  <button class="back-btn is-amber" type="button" data-open-room="whot">Play here</button>
+                  <a class="back-btn" href="https://github.com/Aphoe4x/whot" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+                <button class="back-close" type="button">Flip back</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" style="--i: 1">
+          <div class="card-tilt">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-ziki" aria-labelledby="name-ziki" aria-describedby="line-ziki">
+                  <span class="card-rule" aria-hidden="true"></span>
+                  <span class="card-top">
+                    <span class="card-id"><span class="card-num">02</span><span class="card-suit is-amber" aria-hidden="true">♥</span></span>
+                    <span class="card-live">live ↗</span>
+                  </span>
                   <span class="card-name" id="name-ziki">Ziki</span>
                   <span class="card-line" id="line-ziki">An issue tracker where AI agents claim work and humans gate the merges.</span>
-                </span>
-                <span class="card-foot">
-                  <span class="card-stack">Next.js, TypeScript, Prisma, PostgreSQL</span>
-                  <span class="card-flip-hint">Flip for links</span>
-                </span>
-                <span class="card-watermark is-red" aria-hidden="true">&#9829;</span>
-              </button>
-            </div>
-            <div class="flip-face flip-back" id="back-ziki" inert>
-              <div class="back-top">
-                <img class="back-logo" src="assets/projects/ziki.svg" alt="" width="46" height="46" loading="lazy" />
-                <div>
-                  <p class="back-kicker">King of hearts</p>
-                  <h3 class="back-name">Ziki</h3>
+                  <span class="card-tags">
+                    <span>Next.js</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL</span>
+                  </span>
+                  <span class="card-hint">flip for links ↻</span>
+                </button>
+              </div>
+              <div class="flip-face flip-back" id="back-ziki" inert>
+                <div class="back-top">
+                  <img class="back-logo" src="assets/projects/ziki.svg" alt="" width="40" height="40" loading="lazy" />
+                  <div>
+                    <p class="back-kicker">king of hearts</p>
+                    <h3 class="back-name">Ziki</h3>
+                  </div>
                 </div>
+                <p class="back-text">Agents claim issues, submit pull requests with test proof, and humans gate the merges. Built at HNG15, with an agent work feed and escalating permissions.</p>
+                <p class="back-stack">Next.js, TypeScript, Prisma, PostgreSQL</p>
+                <div class="back-actions">
+                  <a class="back-btn is-amber" href="https://ziki.dev" target="_blank" rel="noopener noreferrer">Live site</a>
+                </div>
+                <button class="back-close" type="button">Flip back</button>
               </div>
-              <p class="back-text">Agents claim issues, submit pull requests with test proof, and humans gate the merges. Built at HNG15, with an agent work feed and escalating permissions.</p>
-              <p class="back-stack">Next.js, TypeScript, Prisma, PostgreSQL</p>
-              <div class="back-actions">
-                <a class="back-btn is-accent" href="https://ziki.dev" target="_blank" rel="noopener noreferrer">Live site</a>
-              </div>
-              <button class="back-close" type="button">Flip back</button>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="work-card">
-        <div class="card-tilt">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-shop" aria-labelledby="name-shop" aria-describedby="line-shop">
-                <span class="card-rank"><span>Q</span><span class="card-suit is-red">&#9830;</span></span>
-                <span class="card-body">
+        <article class="work-card reveal" style="--i: 2">
+          <div class="card-tilt">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-shop" aria-labelledby="name-shop" aria-describedby="line-shop">
+                  <span class="card-rule" aria-hidden="true"></span>
+                  <span class="card-top">
+                    <span class="card-id"><span class="card-num">03</span><span class="card-suit is-amber" aria-hidden="true">♦</span></span>
+                    <span class="card-live">live ↗</span>
+                  </span>
                   <span class="card-name" id="name-shop">shop-website</span>
-                  <span class="card-line" id="line-shop">A Nigerian online shop with a catalogue, cart, checkout and orders.</span>
-                </span>
-                <span class="card-foot">
-                  <span class="card-stack">React, Node.js, Supabase</span>
-                  <span class="card-flip-hint">Flip for links</span>
-                </span>
-                <span class="card-watermark is-red" aria-hidden="true">&#9830;</span>
-              </button>
-            </div>
-            <div class="flip-face flip-back" id="back-shop" inert>
-              <div class="back-top">
-                <img class="back-logo" src="assets/projects/shop-192.png" alt="" width="46" height="46" loading="lazy" />
-                <div>
-                  <p class="back-kicker">Queen of diamonds</p>
-                  <h3 class="back-name">shop-website</h3>
+                  <span class="card-line" id="line-shop">A Nigerian online shop with a catalogue, cart, checkout and order history.</span>
+                  <span class="card-tags">
+                    <span>React</span><span>Node.js</span><span>Supabase</span>
+                  </span>
+                  <span class="card-hint">flip for links ↻</span>
+                </button>
+              </div>
+              <div class="flip-face flip-back" id="back-shop" inert>
+                <div class="back-top">
+                  <img class="back-logo" src="assets/projects/shop-192.png" alt="" width="40" height="40" loading="lazy" />
+                  <div>
+                    <p class="back-kicker">queen of diamonds</p>
+                    <h3 class="back-name">shop-website</h3>
+                  </div>
                 </div>
+                <p class="back-text">Catalogue, cart, checkout, order history. Google sign in, Mailgun receipts, an installable PWA and an Expo app sharing one REST API.</p>
+                <p class="back-stack">React, Node.js, Supabase</p>
+                <div class="back-actions">
+                  <a class="back-btn is-amber" href="https://shop-website-dun.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="back-btn" href="https://github.com/Aphoe4x/shop-website" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+                <button class="back-close" type="button">Flip back</button>
               </div>
-              <p class="back-text">Catalogue, cart, checkout and order history. Google sign in, Mailgun receipts, an installable PWA and an Expo app sharing one REST API.</p>
-              <p class="back-stack">React, Node.js, Supabase</p>
-              <div class="back-actions">
-                <a class="back-btn is-accent" href="https://shop-website-dun.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
-                <a class="back-btn" href="https://github.com/Aphoe4x/shop-website" target="_blank" rel="noopener noreferrer">Code</a>
-              </div>
-              <button class="back-close" type="button">Flip back</button>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="work-card">
-        <div class="card-tilt">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-book" aria-labelledby="name-book" aria-describedby="line-book">
-                <span class="card-rank"><span>J</span><span class="card-suit">&#9827;</span></span>
-                <span class="card-body">
+        <article class="work-card reveal" style="--i: 3">
+          <div class="card-tilt">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-book" aria-labelledby="name-book" aria-describedby="line-book">
+                  <span class="card-rule" aria-hidden="true"></span>
+                  <span class="card-top">
+                    <span class="card-id"><span class="card-num">04</span><span class="card-suit is-amber" aria-hidden="true">♣</span></span>
+                    <span class="card-live">live ↗</span>
+                  </span>
                   <span class="card-name" id="name-book">Book with Aphoe</span>
                   <span class="card-line" id="line-book">A booking marketplace where companies publish services and clients book real slots.</span>
-                </span>
-                <span class="card-foot">
-                  <span class="card-stack">Laravel, MySQL</span>
-                  <span class="card-flip-hint">Flip for links</span>
-                </span>
-                <span class="card-watermark" aria-hidden="true">&#9827;</span>
-              </button>
-            </div>
-            <div class="flip-face flip-back" id="back-book" inert>
-              <div class="back-top">
-                <img class="back-logo" src="assets/projects/book.svg" alt="" width="46" height="46" loading="lazy" />
-                <div>
-                  <p class="back-kicker">Jack of clubs</p>
-                  <h3 class="back-name">Book with Aphoe</h3>
+                  <span class="card-tags">
+                    <span>Laravel</span><span>MySQL</span>
+                  </span>
+                  <span class="card-hint">flip for links ↻</span>
+                </button>
+              </div>
+              <div class="flip-face flip-back" id="back-book" inert>
+                <div class="back-top">
+                  <img class="back-logo" src="assets/projects/book.svg" alt="" width="40" height="40" loading="lazy" />
+                  <div>
+                    <p class="back-kicker">jack of clubs</p>
+                    <h3 class="back-name">Book with Aphoe</h3>
+                  </div>
                 </div>
+                <p class="back-text">Companies publish services and prices, clients compare and book. Double bookings are stopped at the database layer with transactional locking.</p>
+                <p class="back-stack">Laravel, MySQL</p>
+                <div class="back-actions">
+                  <a class="back-btn is-amber" href="https://book-with-aphoe.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="back-btn" href="https://github.com/Aphoe4x/mini-booking-system" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+                <button class="back-close" type="button">Flip back</button>
               </div>
-              <p class="back-text">Companies publish services and prices, clients compare and book. Double bookings are stopped at the database layer with transactional locking and unique indexes.</p>
-              <p class="back-stack">Laravel, MySQL</p>
-              <div class="back-actions">
-                <a class="back-btn is-accent" href="https://book-with-aphoe.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
-                <a class="back-btn" href="https://github.com/Aphoe4x/mini-booking-system" target="_blank" rel="noopener noreferrer">Code</a>
-              </div>
-              <button class="back-close" type="button">Flip back</button>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="work-card">
-        <div class="card-tilt">
-          <div class="flip-inner">
-            <div class="flip-face flip-front">
-              <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-todo" aria-labelledby="name-todo" aria-describedby="line-todo">
-                <span class="card-rank"><span>10</span><span class="card-suit">&#9824;</span></span>
-                <span class="card-body">
+        <article class="work-card reveal" style="--i: 4">
+          <div class="card-tilt">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-todo" aria-labelledby="name-todo" aria-describedby="line-todo">
+                  <span class="card-rule" aria-hidden="true"></span>
+                  <span class="card-top">
+                    <span class="card-id"><span class="card-num">05</span><span class="card-suit is-amber" aria-hidden="true">♠</span></span>
+                    <span class="card-live">live ↗</span>
+                  </span>
                   <span class="card-name" id="name-todo">Todo List</span>
                   <span class="card-line" id="line-todo">Tasks, a calendar, a kanban board, a Pomodoro timer and dark mode.</span>
-                </span>
-                <span class="card-foot">
-                  <span class="card-stack">HTML, CSS, JavaScript</span>
-                  <span class="card-flip-hint">Flip for links</span>
-                </span>
-                <span class="card-watermark" aria-hidden="true">&#9824;</span>
-              </button>
-            </div>
-            <div class="flip-face flip-back" id="back-todo" inert>
-              <div class="back-top">
-                <img class="back-logo" src="assets/projects/todo.png" alt="" width="46" height="46" loading="lazy" />
-                <div>
-                  <p class="back-kicker">Ten of spades</p>
-                  <h3 class="back-name">Todo List</h3>
+                  <span class="card-tags">
+                    <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                  </span>
+                  <span class="card-hint">flip for links ↻</span>
+                </button>
+              </div>
+              <div class="flip-face flip-back" id="back-todo" inert>
+                <div class="back-top">
+                  <img class="back-logo" src="assets/projects/todo.png" alt="" width="40" height="40" loading="lazy" />
+                  <div>
+                    <p class="back-kicker">ten of spades</p>
+                    <h3 class="back-name">Todo List</h3>
+                  </div>
                 </div>
+                <p class="back-text">Priorities, due dates, filters, a calendar, drag and drop and a Pomodoro timer. Vanilla HTML, CSS and JavaScript, no build step.</p>
+                <p class="back-stack">HTML, CSS, JavaScript</p>
+                <div class="back-actions">
+                  <a class="back-btn is-amber" href="https://todo-list-afolabi.netlify.app" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="back-btn" href="https://github.com/Aphoe4x/todo-list" target="_blank" rel="noopener noreferrer">Code</a>
+                </div>
+                <button class="back-close" type="button">Flip back</button>
               </div>
-              <p class="back-text">Priorities, due dates, filters, a calendar, drag and drop, and a Pomodoro timer. Vanilla HTML, CSS and JavaScript with no build step and no backend.</p>
-              <p class="back-stack">HTML, CSS, JavaScript</p>
-              <div class="back-actions">
-                <a class="back-btn is-accent" href="https://todo-list-afolabi.netlify.app" target="_blank" rel="noopener noreferrer">Live site</a>
-                <a class="back-btn" href="https://github.com/Aphoe4x/todo-list" target="_blank" rel="noopener noreferrer">Code</a>
-              </div>
-              <button class="back-close" type="button">Flip back</button>
             </div>
           </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="section about" id="about">
-    <header class="section-head reveal">
-      <p class="section-tag"><span>02</span> About</p>
-      <h2 class="section-title">A backend developer who still <em>shows up to the table</em>.</h2>
-    </header>
-
-    <div class="about-grid">
-      <div class="about-copy reveal" style="--i: 1">
-        <p>
-          I am Afolabi Abdulbasit Opeyemi, a backend-leaning full-stack developer in Lagos. Most of my work is PHP and Laravel on the server, Node.js when a project calls for it, and interfaces built in plain JavaScript, React or Tailwind.
-        </p>
-        <p>
-          I've shipped for teams in the UK, Canada and Nigeria: a WordPress site for a national employment organization, payment flows for an art marketplace, a multi-company booking marketplace, an online shop, and a Whot game with realtime rooms. I finished HNG15 as a finalist along the way.
-        </p>
-        <p>
-          I like small tools that solve one problem well, tests that catch real mistakes, and code someone else can pick up on a Monday. When I'm not building, I'm usually losing at my own card game.
-        </p>
+        </article>
       </div>
+    </section>
 
-      <div class="stat-deck reveal" style="--i: 2">
-        <div class="stat">
-          <span class="stat-value">3+</span>
-          <span class="stat-label">years shipping</span>
+    <section class="block" id="about">
+      <h2 class="mega reveal">About</h2>
+      <p class="label reveal" style="--i: 1">the player</p>
+
+      <div class="about-grid">
+        <div class="about-copy reveal" style="--i: 2">
+          <p>
+            I am Afolabi Abdulbasit Opeyemi, a backend-leaning full-stack developer in Lagos. Most of my work is PHP and Laravel on the server, Node.js when a project calls for it, and interfaces in plain JavaScript, React or Tailwind.
+          </p>
+          <p>
+            I have shipped for teams in the UK, Canada and Nigeria: a WordPress site for a national employment organisation, payment flows for an art marketplace, a multi-company booking marketplace, an online shop, and a Whot game with realtime rooms. I finished HNG15 as a finalist along the way.
+          </p>
+          <p>
+            I like small tools that solve one problem well, tests that catch real mistakes, and code someone else can pick up on a Monday. When I am not building, I am usually losing at my own card game.
+          </p>
         </div>
-        <div class="stat">
-          <span class="stat-value">6</span>
-          <span class="stat-label">live projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">3</span>
-          <span class="stat-label">countries worked with</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">HNG15</span>
-          <span class="stat-label">finalist</span>
+
+        <div class="stats reveal" style="--i: 3">
+          <div class="stat">
+            <span class="stat-value" data-count="3" data-suffix="+">3+</span>
+            <span class="stat-label">years shipping</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="6">6</span>
+            <span class="stat-label">live projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" data-count="6">6</span>
+            <span class="stat-label">teams worked with</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value stat-value--small">HNG15</span>
+            <span class="stat-label">finalist</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="block" id="experience">
+      <h2 class="mega reveal">Experience</h2>
+      <div class="block-head reveal" style="--i: 1">
+        <p class="label">six seats at the table</p>
+        <p class="block-note">2023 - now</p>
+      </div>
+
+      <ol class="jobs">
+        <li class="job reveal" style="--i: 0">
+          <div class="job-head">
+            <span class="job-num">01</span>
+            <div class="job-where">
+              <h3 class="job-role">AI Product Engineer Intern</h3>
+              <p class="job-org">HNG Internship 15 <span class="job-mode">remote</span></p>
+            </div>
+            <span class="job-time">Sep - Nov 2026</span>
+          </div>
+          <ul class="job-points">
+            <li>Finalist in a competitive cohort building AI product features with agentic coding tools in a Git-based workflow.</li>
+            <li>Shipped full-stack features end to end: Ziki, an e-commerce app on React and Express, and containerised PHP services.</li>
+          </ul>
+        </li>
+
+        <li class="job reveal" style="--i: 1">
+          <div class="job-head">
+            <span class="job-num">02</span>
+            <div class="job-where">
+              <h3 class="job-role">WordPress Web Developer</h3>
+              <p class="job-org">Canadian Association for Supported Employment <span class="job-mode">remote, contract</span></p>
+            </div>
+            <span class="job-time">Jan - Mar 2026</span>
+          </div>
+          <ul class="job-points">
+            <li>Maintained a live WordPress site for an international organisation, modifying themes and plugins.</li>
+            <li>Managed WP Engine staging to production deploys with pre-release testing and WooCommerce fixes.</li>
+          </ul>
+        </li>
+
+        <li class="job reveal" style="--i: 2">
+          <div class="job-head">
+            <span class="job-num">03</span>
+            <div class="job-where">
+              <h3 class="job-role">Backend Developer</h3>
+              <p class="job-org">Artgidi <span class="job-mode">remote, contract</span></p>
+            </div>
+            <span class="job-time">Sep 2024 - Nov 2025</span>
+          </div>
+          <ul class="job-points">
+            <li>Delivered backend fixes and features in PHP and Laravel on a production application.</li>
+            <li>Optimised MySQL queries and structures, and integrated payment APIs with webhook handling.</li>
+          </ul>
+        </li>
+
+        <li class="job reveal" style="--i: 3">
+          <div class="job-head">
+            <span class="job-num">04</span>
+            <div class="job-where">
+              <h3 class="job-role">Frontend and Backend Web Developer</h3>
+              <p class="job-org">Mployus Group <span class="job-mode">UK and Ireland, remote</span></p>
+            </div>
+            <span class="job-time">May - Nov 2024</span>
+          </div>
+          <ul class="job-points">
+            <li>Rebuilt frontend sections and wired them to a Laravel backend.</li>
+            <li>Supported live bug fixes and deployments on a customer-facing site.</li>
+          </ul>
+        </li>
+
+        <li class="job reveal" style="--i: 4">
+          <div class="job-head">
+            <span class="job-num">05</span>
+            <div class="job-where">
+              <h3 class="job-role">Frontend Web Developer</h3>
+              <p class="job-org">AGROBOT <span class="job-mode">remote</span></p>
+            </div>
+            <span class="job-time">Nov 2023 - Jan 2024</span>
+          </div>
+          <ul class="job-points">
+            <li>Developed responsive pages with HTML, CSS and JavaScript for a customer-facing product.</li>
+          </ul>
+        </li>
+
+        <li class="job reveal" style="--i: 5">
+          <div class="job-head">
+            <span class="job-num">06</span>
+            <div class="job-where">
+              <h3 class="job-role">Backend Web Developer</h3>
+              <p class="job-org">Pan Events <span class="job-mode">remote</span></p>
+            </div>
+            <span class="job-time">Aug - Oct 2023</span>
+          </div>
+          <ul class="job-points">
+            <li>Built backend features in PHP and Laravel, and tuned MySQL structures and queries.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="block" id="skills">
+      <h2 class="mega reveal">Skills</h2>
+      <div class="block-head reveal" style="--i: 1">
+        <p class="label">the four suits</p>
+        <p class="block-note">what I play with</p>
+      </div>
+
+      <div class="suits">
+        <article class="suit reveal" style="--i: 0">
+          <div class="suit-head">
+            <span class="suit-mark" aria-hidden="true">♠</span>
+            <span class="suit-num">01</span>
+          </div>
+          <h3 class="suit-name">Backend</h3>
+          <p class="suit-line">The part I am hired for.</p>
+          <ul class="suit-tags">
+            <li>PHP</li><li>Laravel</li><li>Node.js</li><li>Express</li><li>REST APIs</li><li>OAuth 2.0</li><li>Webhooks</li>
+          </ul>
+        </article>
+
+        <article class="suit reveal" style="--i: 1">
+          <div class="suit-head">
+            <span class="suit-mark" aria-hidden="true">♥</span>
+            <span class="suit-num">02</span>
+          </div>
+          <h3 class="suit-name">Frontend</h3>
+          <p class="suit-line">Interfaces that stay out of the way.</p>
+          <ul class="suit-tags">
+            <li>JavaScript</li><li>React</li><li>Next.js</li><li>HTML</li><li>CSS</li><li>Tailwind</li><li>Bootstrap</li>
+          </ul>
+        </article>
+
+        <article class="suit reveal" style="--i: 2">
+          <div class="suit-head">
+            <span class="suit-mark" aria-hidden="true">♦</span>
+            <span class="suit-num">03</span>
+          </div>
+          <h3 class="suit-name">Data</h3>
+          <p class="suit-line">Schemas that survive the second year.</p>
+          <ul class="suit-tags">
+            <li>MySQL</li><li>PostgreSQL</li><li>Supabase</li><li>Schema design</li><li>Indexing</li><li>Query tuning</li>
+          </ul>
+        </article>
+
+        <article class="suit reveal" style="--i: 3">
+          <div class="suit-head">
+            <span class="suit-mark" aria-hidden="true">♣</span>
+            <span class="suit-num">04</span>
+          </div>
+          <h3 class="suit-name">Tooling</h3>
+          <p class="suit-line">The unglamorous half of shipping.</p>
+          <ul class="suit-tags">
+            <li>Git</li><li>Docker</li><li>Postman</li><li>Vercel</li><li>Render</li><li>WP Engine</li><li>cPanel</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="contact">
+      <h2 class="mega reveal">Say hi</h2>
+      <div class="contact-head reveal" style="--i: 1">
+        <span class="pill-amber"><span class="pulse" aria-hidden="true"></span> available for work</span>
+        <p class="contact-line">Available for work. Let's build something people actually use.</p>
+        <div class="contact-mail">
+          <a href="mailto:aphoe4x@gmail.com">aphoe4x@gmail.com</a>
+          <button class="copy" type="button" data-copy="aphoe4x@gmail.com">copy</button>
+        </div>
+      </div>
+
+      <div class="contact-cards">
+        <a class="contact-card reveal" style="--i: 0" href="mailto:aphoe4x@gmail.com">
+          <span class="contact-top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.6 6.6 8.4 6 8.4-6"/></svg>
+            <span class="contact-suit" aria-hidden="true">♠</span>
+          </span>
+          <span class="contact-name">Email</span>
+          <span class="contact-handle">aphoe4x@gmail.com</span>
+        </a>
+
+        <a class="contact-card reveal" style="--i: 1" href="https://github.com/Aphoe4x" target="_blank" rel="noopener noreferrer">
+          <span class="contact-top">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg>
+            <span class="contact-suit" aria-hidden="true">♥</span>
+          </span>
+          <span class="contact-name">GitHub</span>
+          <span class="contact-handle">@Aphoe4x</span>
+        </a>
+
+        <a class="contact-card reveal" style="--i: 2" href="https://x.com/aphoooe" target="_blank" rel="noopener noreferrer">
+          <span class="contact-top">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 2h3.3l-7.2 8.2L22.8 22h-6.6l-5.2-6.8L4.9 22H1.6l7.7-8.8L1.2 2h6.8l4.7 6.2L18.2 2Zm-1.2 18h1.8L7.1 3.9H5.1L17 20Z"/></svg>
+            <span class="contact-suit" aria-hidden="true">♦</span>
+          </span>
+          <span class="contact-name">X</span>
+          <span class="contact-handle">@aphoooe</span>
+        </a>
+
+        <a class="contact-card reveal" style="--i: 3" href="https://aphoe4x.github.io/cv.pdf" target="_blank" rel="noopener noreferrer">
+          <span class="contact-top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+            <span class="contact-suit" aria-hidden="true">♣</span>
+          </span>
+          <span class="contact-name">CV</span>
+          <span class="contact-handle">two pages, PDF</span>
+        </a>
+      </div>
+
+      <a class="to-top" href="#home">back to the top ↑</a>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-note">© <span id="year">2026</span> Afolabi Abdulbasit Opeyemi</p>
+      <p class="foot-note">Built from scratch with plain HTML, CSS and JavaScript.</p>
+    </footer>
+  </div>
 </main>
-
-<footer class="footer">
-  <p class="footer-note">Afolabi Abdulbasit Opeyemi. Built from scratch with plain HTML, CSS and JavaScript.</p>
-  <ul class="footer-links">
-    <li><a href="https://github.com/Aphoe4x">GitHub</a></li>
-    <li><a href="https://x.com/aphoooe">X</a></li>
-    <li><a href="https://aphoe4x.github.io/cv.pdf">CV</a></li>
-    <li><a href="mailto:aphoe4x@gmail.com">Email</a></li>
-  </ul>
-</footer>
 
 <dialog class="room" id="whot-room" aria-labelledby="room-title">
   <div class="room-inner">
     <div class="room-bar">
       <div>
-        <p class="room-kicker">Live from the table</p>
+        <p class="room-kicker">live from the table</p>
         <h2 class="room-title" id="room-title">Whot</h2>
       </div>
       <div class="room-tools">
-        <a class="room-link" href="https://aphoe4x.github.io/whot/" target="_blank" rel="noopener noreferrer">Open in a new tab</a>
+        <a class="room-link" href="https://aphoe4x.github.io/whot/" target="_blank" rel="noopener noreferrer">open in a new tab</a>
         <button class="room-close" id="room-close" type="button">Close</button>
       </div>
     </div>
@@ -360,7 +655,7 @@
 </dialog>
 
 <div class="ghost-card" id="ghost" aria-hidden="true">
-  <span class="ghost-star">&#9733;</span>
+  <span class="ghost-star">★</span>
 </div>
 </body>
 </html>

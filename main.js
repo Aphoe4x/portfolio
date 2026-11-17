@@ -8,55 +8,221 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var root = document.documentElement;
 
   /* ------------------------------------------------------------------------
-     Masthead: quiet until the page moves
+     A quick count in, then the table opens
      ---------------------------------------------------------------------- */
 
-  var masthead = document.getElementById('masthead');
+  var loader = document.getElementById('loader');
+  var loaderCount = document.getElementById('loader-count');
+  var loaderBar = document.getElementById('loader-bar');
+  var fan = document.getElementById('fan');
 
-  if (masthead) {
-    var syncMasthead = function () {
-      masthead.classList.toggle('is-stuck', window.scrollY > 12);
+  var seen = false;
+
+  try {
+    seen = window.sessionStorage.getItem('aphoe-dealt') === '1';
+  } catch (error) {
+    seen = false;
+  }
+
+  function openTable() {
+    root.classList.remove('is-loading');
+    root.classList.add('is-ready');
+
+    if (loader) {
+      loader.classList.add('is-done');
+      window.setTimeout(function () {
+        loader.hidden = true;
+      }, 620);
+    }
+
+    if (fan && !reduceMotion) {
+      fan.classList.add('is-dealt');
+    }
+
+    try {
+      window.sessionStorage.setItem('aphoe-dealt', '1');
+    } catch (error) {
+      /* private mode, never mind */
+    }
+  }
+
+  if (!loader || reduceMotion || seen) {
+    openTable();
+  } else {
+    var start = null;
+    var duration = 950;
+
+    var tick = function (now) {
+      if (start === null) start = now;
+
+      var progress = Math.min(1, (now - start) / duration);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = Math.round(eased * 100);
+
+      if (loaderCount) {
+        loaderCount.textContent = String(value).padStart(3, '0');
+      }
+
+      if (loaderBar) {
+        loaderBar.style.width = value + '%';
+      }
+
+      if (progress < 1) {
+        window.requestAnimationFrame(tick);
+      } else {
+        openTable();
+      }
     };
 
-    window.addEventListener('scroll', syncMasthead, { passive: true });
-    syncMasthead();
+    window.requestAnimationFrame(tick);
   }
 
   /* ------------------------------------------------------------------------
-     Scrollspy: a dot under the section you are reading
+     A hand that fans with the pointer
      ---------------------------------------------------------------------- */
 
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  if (fan) {
+    var fanCards = Array.prototype.slice.call(fan.querySelectorAll('.fan-card'));
+    var middle = (fanCards.length - 1) / 2;
+    var lean = 0;
+
+    var layOutFan = function (pull) {
+      var base = fanCards[0] ? fanCards[0].offsetWidth : 74;
+      var spacing = base * 0.72;
+      var spread = 7 + Math.abs(pull) * 5;
+      var drift = pull * base * 0.5;
+
+      fanCards.forEach(function (card, index) {
+        var offset = index - middle;
+
+        card.style.setProperty('--x', (offset * spacing + drift).toFixed(1) + 'px');
+        card.style.setProperty('--y', (Math.abs(offset) * base * 0.18).toFixed(1) + 'px');
+        card.style.setProperty('--r', (offset * spread).toFixed(2) + 'deg');
+      });
+    };
+
+    layOutFan(0);
+
+    if (finePointer && !reduceMotion) {
+      var hero = document.querySelector('.hero');
+
+      if (hero) {
+        hero.addEventListener(
+          'pointermove',
+          function (event) {
+            var rect = hero.getBoundingClientRect();
+            lean = ((event.clientX - rect.left) / rect.width - 0.5) * 1.6;
+            layOutFan(Math.max(-1, Math.min(1, lean)));
+          },
+          { passive: true }
+        );
+
+        hero.addEventListener('pointerleave', function () {
+          layOutFan(0);
+        });
+      }
+    }
+
+    var refit = null;
+
+    window.addEventListener(
+      'resize',
+      function () {
+        window.clearTimeout(refit);
+        refit = window.setTimeout(function () {
+          layOutFan(0);
+        }, 160);
+      },
+      { passive: true }
+    );
+  }
+
+  /* ------------------------------------------------------------------------
+     Lagos clock
+     ---------------------------------------------------------------------- */
+
+  var clock = document.getElementById('clock');
+
+  if (clock) {
+    var readClock = function () {
+      var time;
+
+      try {
+        time = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Africa/Lagos',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).format(new Date());
+      } catch (error) {
+        time = new Date().toTimeString().slice(0, 5);
+      }
+
+      clock.textContent = time;
+    };
+
+    readClock();
+    window.setInterval(readClock, 20000);
+  }
+
+  /* ------------------------------------------------------------------------
+     The rail: which seat are we at
+     ---------------------------------------------------------------------- */
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.rail-item'));
   var spySections = navLinks
     .map(function (link) {
-      return document.querySelector(link.getAttribute('href'));
+      var id = link.getAttribute('href');
+      return id && id.charAt(0) === '#' ? document.querySelector(id) : null;
     })
     .filter(Boolean);
 
-  if (spySections.length && 'IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var hash = '#' + entry.target.id;
+  if (spySections.length) {
+    var ticking = false;
 
-          navLinks.forEach(function (link) {
-            link.classList.toggle('is-active', link.getAttribute('href') === hash);
-          });
-        });
+    var markRail = function () {
+      ticking = false;
+
+      var line = window.scrollY + window.innerHeight * 0.35;
+      var active = spySections[0];
+
+      spySections.forEach(function (section) {
+        var top = section.getBoundingClientRect().top + window.scrollY;
+        if (top <= line) active = section;
+      });
+
+      var atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+
+      if (atBottom) {
+        active = spySections[spySections.length - 1];
+      }
+
+      navLinks.forEach(function (link) {
+        link.classList.toggle('is-active', link.getAttribute('href') === '#' + active.id);
+      });
+    };
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(markRail);
+        }
       },
-      { rootMargin: '-42% 0px -52% 0px', threshold: 0 }
+      { passive: true }
     );
 
-    spySections.forEach(function (section) {
-      spy.observe(section);
-    });
+    markRail();
   }
 
   /* ------------------------------------------------------------------------
-     Reveal sections as they come up the table
+     Reveal as things come up the table
      ---------------------------------------------------------------------- */
 
   var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
@@ -78,7 +244,7 @@
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.15 }
+      { rootMargin: '0px 0px -7% 0px', threshold: 0.12 }
     );
 
     revealables.forEach(function (el) {
@@ -87,34 +253,80 @@
   }
 
   /* ------------------------------------------------------------------------
-     The card that follows the cursor
+     Stats count up like chips being stacked
+     ---------------------------------------------------------------------- */
+
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+
+  if (counters.length && 'IntersectionObserver' in window && !reduceMotion) {
+    var countObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          var el = entry.target;
+          var target = Number(el.getAttribute('data-count'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          var start = null;
+
+          var run = function (now) {
+            if (start === null) start = now;
+            var progress = Math.min(1, (now - start) / 900);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (progress < 1) window.requestAnimationFrame(run);
+          };
+
+          window.requestAnimationFrame(run);
+          countObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach(function (counter) {
+      countObserver.observe(counter);
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     The card that follows the cursor, only over the spread
      ---------------------------------------------------------------------- */
 
   var ghost = document.getElementById('ghost');
+  var spread = document.querySelector('.work-grid');
 
-  if (ghost && finePointer && !reduceMotion) {
-    var targetX = window.innerWidth / 2;
-    var targetY = window.innerHeight / 2;
-    var currentX = targetX;
-    var currentY = targetY;
+  if (ghost && spread && finePointer && !reduceMotion) {
+    var targetX = 0;
+    var targetY = 0;
+    var currentX = 0;
+    var currentY = 0;
     var frame = null;
 
-    function step() {
+    var step = function () {
       currentX += (targetX - currentX) * 0.16;
       currentY += (targetY - currentY) * 0.16;
 
-      var tilt = Math.max(-14, Math.min(14, (targetX - currentX) * 0.12));
+      var tilt = Math.max(-12, Math.min(12, (targetX - currentX) * 0.1));
 
       ghost.style.transform =
-        'translate3d(' + currentX + 'px,' + currentY + 'px,0)' +
-        ' translate(-50%,-50%) rotate(' + tilt + 'deg)';
+        'translate3d(' + (currentX + 20) + 'px,' + (currentY + 16) + 'px,0)' +
+        ' rotate(' + (tilt - 8) + 'deg)';
 
       if (Math.abs(targetX - currentX) > 0.4 || Math.abs(targetY - currentY) > 0.4) {
         frame = window.requestAnimationFrame(step);
       } else {
         frame = null;
       }
-    }
+    };
+
+    spread.addEventListener('pointerenter', function () {
+      ghost.classList.add('is-live');
+    });
+
+    spread.addEventListener('pointerleave', function () {
+      ghost.classList.remove('is-live');
+    });
 
     window.addEventListener(
       'pointermove',
@@ -122,22 +334,16 @@
         targetX = event.clientX;
         targetY = event.clientY;
 
-        if (!ghost.classList.contains('is-live')) {
-          currentX = targetX;
-          currentY = targetY;
-          ghost.classList.add('is-live');
-        }
+        if (!ghost.classList.contains('is-live')) return;
 
         if (frame === null) {
+          currentX = targetX;
+          currentY = targetY;
           frame = window.requestAnimationFrame(step);
         }
       },
       { passive: true }
     );
-
-    document.addEventListener('pointerleave', function () {
-      ghost.classList.remove('is-live');
-    });
   }
 
   /* ------------------------------------------------------------------------
@@ -197,8 +403,8 @@
           var rect = card.getBoundingClientRect();
           var px = (event.clientX - rect.left) / rect.width - 0.5;
           var py = (event.clientY - rect.top) / rect.height - 0.5;
-          tilt.style.setProperty('--ty', (px * 9).toFixed(2) + 'deg');
-          tilt.style.setProperty('--tx', (-py * 9).toFixed(2) + 'deg');
+          tilt.style.setProperty('--ty', (px * 5).toFixed(2) + 'deg');
+          tilt.style.setProperty('--tx', (-py * 5).toFixed(2) + 'deg');
         },
         { passive: true }
       );
@@ -272,7 +478,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     Shuffle: re-deal the page
+     Shuffle: gather the spread and deal it again
      ---------------------------------------------------------------------- */
 
   var shuffleBtn = document.getElementById('shuffle');
@@ -280,22 +486,24 @@
   if (shuffleBtn) {
     shuffleBtn.addEventListener('click', function () {
       shuffleBtn.classList.remove('is-spinning');
-      // Force the animation to restart if it is already running.
       void shuffleBtn.offsetWidth;
       shuffleBtn.classList.add('is-spinning');
 
-      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-
       workCards.forEach(function (card) {
         card.classList.remove('is-flipped');
+        card.classList.remove('is-in');
+
         var front = card.querySelector('.card-hit');
         var back = card.querySelector('.flip-back');
         var tilt = card.querySelector('.card-tilt');
+
         if (front) {
           front.setAttribute('aria-expanded', 'false');
           front.removeAttribute('tabindex');
         }
+
         if (back) back.setAttribute('inert', '');
+
         if (tilt) {
           tilt.style.removeProperty('--tx');
           tilt.style.removeProperty('--ty');
@@ -306,19 +514,50 @@
         closeRoom();
       }
 
-      var cards = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-      cards.forEach(function (card, index) {
-        card.classList.remove('is-in');
-        card.classList.remove('re-dealt');
-        void card.offsetWidth;
-        card.style.setProperty('--i', String(index % 6));
-      });
+      void spread.offsetWidth;
 
       window.setTimeout(function () {
-        cards.forEach(function (card) {
+        workCards.forEach(function (card) {
           card.classList.add('is-in');
         });
-      }, reduceMotion ? 0 : 260);
+      }, reduceMotion ? 0 : 60);
     });
+  }
+
+  /* ------------------------------------------------------------------------
+     Copy the address
+     ---------------------------------------------------------------------- */
+
+  var copyBtn = document.querySelector('[data-copy]');
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var value = copyBtn.getAttribute('data-copy');
+      var label = copyBtn.textContent;
+      var done = function () {
+        copyBtn.textContent = 'copied';
+        copyBtn.classList.add('is-done');
+        window.setTimeout(function () {
+          copyBtn.textContent = label;
+          copyBtn.classList.remove('is-done');
+        }, 1600);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(done, function () {});
+      } else {
+        done();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     The year
+     ---------------------------------------------------------------------- */
+
+  var year = document.getElementById('year');
+
+  if (year) {
+    year.textContent = String(new Date().getFullYear());
   }
 })();
