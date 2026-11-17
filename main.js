@@ -95,6 +95,137 @@
   }
 
   /* ------------------------------------------------------------------------
+     Work cards: flip, tilt, and reset
+     ---------------------------------------------------------------------- */
+
+  var workCards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+
+  workCards.forEach(function (card) {
+    var front = card.querySelector('.card-hit');
+    var back = card.querySelector('.flip-back');
+    var close = card.querySelector('.back-close');
+
+    if (!front || !back || !close) return;
+
+    function setFlipped(on) {
+      card.classList.toggle('is-flipped', on);
+      front.setAttribute('aria-expanded', on ? 'true' : 'false');
+
+      if (on) {
+        back.removeAttribute('inert');
+        front.setAttribute('tabindex', '-1');
+        close.focus({ preventScroll: true });
+      } else {
+        back.setAttribute('inert', '');
+        front.removeAttribute('tabindex');
+      }
+    }
+
+    front.addEventListener('click', function () {
+      setFlipped(true);
+    });
+
+    close.addEventListener('click', function () {
+      setFlipped(false);
+      front.focus({ preventScroll: true });
+    });
+
+    card.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && card.classList.contains('is-flipped')) {
+        event.stopPropagation();
+        setFlipped(false);
+        front.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  if (finePointer && !reduceMotion) {
+    workCards.forEach(function (card) {
+      var tilt = card.querySelector('.card-tilt');
+      if (!tilt) return;
+
+      card.addEventListener(
+        'pointermove',
+        function (event) {
+          if (card.classList.contains('is-flipped')) return;
+          var rect = card.getBoundingClientRect();
+          var px = (event.clientX - rect.left) / rect.width - 0.5;
+          var py = (event.clientY - rect.top) / rect.height - 0.5;
+          tilt.style.setProperty('--ty', (px * 9).toFixed(2) + 'deg');
+          tilt.style.setProperty('--tx', (-py * 9).toFixed(2) + 'deg');
+        },
+        { passive: true }
+      );
+
+      card.addEventListener('pointerleave', function () {
+        tilt.style.removeProperty('--tx');
+        tilt.style.removeProperty('--ty');
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     The room: Whot in a dialog
+     ---------------------------------------------------------------------- */
+
+  var room = document.getElementById('whot-room');
+  var roomFrame = document.getElementById('room-frame');
+  var roomClose = document.getElementById('room-close');
+  var roomTriggers = Array.prototype.slice.call(document.querySelectorAll('[data-open-room]'));
+
+  function openRoom() {
+    if (!room) return;
+
+    if (roomFrame && !roomFrame.getAttribute('src')) {
+      roomFrame.setAttribute('src', roomFrame.getAttribute('data-src'));
+    }
+
+    if (typeof room.showModal === 'function') {
+      room.showModal();
+    } else {
+      room.setAttribute('open', '');
+    }
+
+    document.body.classList.add('is-locked');
+
+    if (roomClose) {
+      roomClose.focus({ preventScroll: true });
+    }
+  }
+
+  function closeRoom() {
+    if (!room) return;
+
+    if (typeof room.close === 'function') {
+      room.close();
+    } else {
+      room.removeAttribute('open');
+    }
+
+    document.body.classList.remove('is-locked');
+  }
+
+  roomTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', openRoom);
+  });
+
+  if (roomClose) {
+    roomClose.addEventListener('click', closeRoom);
+  }
+
+  if (room) {
+    room.addEventListener('click', function (event) {
+      if (event.target === room) {
+        closeRoom();
+      }
+    });
+
+    room.addEventListener('close', function () {
+      document.body.classList.remove('is-locked');
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Shuffle: re-deal the page
      ---------------------------------------------------------------------- */
 
@@ -108,6 +239,26 @@
       shuffleBtn.classList.add('is-spinning');
 
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+
+      workCards.forEach(function (card) {
+        card.classList.remove('is-flipped');
+        var front = card.querySelector('.card-hit');
+        var back = card.querySelector('.flip-back');
+        var tilt = card.querySelector('.card-tilt');
+        if (front) {
+          front.setAttribute('aria-expanded', 'false');
+          front.removeAttribute('tabindex');
+        }
+        if (back) back.setAttribute('inert', '');
+        if (tilt) {
+          tilt.style.removeProperty('--tx');
+          tilt.style.removeProperty('--ty');
+        }
+      });
+
+      if (room && room.hasAttribute('open')) {
+        closeRoom();
+      }
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
       cards.forEach(function (card, index) {

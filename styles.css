@@ -538,6 +538,7 @@ button {
   max-width: 1180px;
   margin: 0 auto;
   padding: clamp(3.5rem, 9vh, 7rem) var(--pad-x);
+  scroll-margin-top: 5.5rem;
 }
 
 .section-head {
@@ -567,6 +568,14 @@ button {
 .section-title em {
   font-style: italic;
   color: var(--gold-bright);
+}
+
+.section-lede {
+  max-width: 54ch;
+  margin: 1rem 0 0;
+  color: var(--cream-dim);
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
@@ -653,6 +662,497 @@ button {
 
   .stat-deck {
     max-width: 26rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Work, the spread of cards
+   -------------------------------------------------------------------------- */
+
+.work-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.work-card {
+  flex: 1 1 290px;
+  max-width: 340px;
+  aspect-ratio: 5 / 7;
+  perspective: 1600px;
+}
+
+.card-tilt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateY(var(--lift, 0px)) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
+  transition: transform 0.35s var(--ease-out);
+}
+
+.work-card:hover .card-tilt {
+  --lift: -6px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s var(--ease-out);
+}
+
+.work-card.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+/* Front */
+
+.flip-front {
+  background:
+    radial-gradient(120% 90% at 100% 0%, #fffdf6 0%, transparent 55%),
+    linear-gradient(158deg, #fdfbf3 0%, #f6f1e4 46%, #e9e0cd 100%);
+  border: 1px solid rgba(18, 32, 26, 0.09);
+}
+
+.flip-front::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(18, 32, 26, 0.1);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.card-hit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  width: 100%;
+  height: 100%;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.card-hit:focus-visible {
+  outline: 2px solid var(--felt-700);
+  outline-offset: -8px;
+  border-radius: var(--radius-card);
+}
+
+.card-rank {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.card-rank .card-suit {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.card-suit.is-red {
+  color: var(--red);
+}
+
+.card-suit.is-gold {
+  color: #b07d21;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-block: auto;
+}
+
+.card-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.6vw, 2rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.card-line {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 26ch;
+}
+
+.card-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px dashed rgba(18, 32, 26, 0.22);
+}
+
+.card-stack {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(18, 32, 26, 0.62);
+  line-height: 1.45;
+}
+
+.card-flip-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(18, 32, 26, 0.45);
+}
+
+.card-flip-hint::before {
+  content: "\21BB";
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.card-watermark {
+  position: absolute;
+  right: -0.12em;
+  bottom: -0.28em;
+  font-size: 8.5rem;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.07;
+  pointer-events: none;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.card-suit.is-red {
+  color: var(--red);
+}
+
+.card-suit.is-gold {
+  color: #b07d21;
+}
+
+.card-watermark.is-red {
+  color: var(--red);
+}
+
+.card-watermark.is-gold {
+  color: #b07d21;
+}
+
+.work-card:hover .card-watermark {
+  transform: translateY(-6px) rotate(-6deg);
+}
+
+/* Back */
+
+.flip-back {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  transform: rotateY(180deg);
+  background:
+    repeating-linear-gradient(45deg, rgba(217, 171, 82, 0.055) 0 7px, transparent 7px 14px),
+    radial-gradient(120% 100% at 100% 0%, #1a5242 0%, #0a2b22 62%, #08251d 100%);
+  border: 1px solid var(--line);
+  color: var(--cream);
+}
+
+.flip-back::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(217, 171, 82, 0.28);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.back-top {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.back-logo {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(246, 241, 228, 0.06);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.back-kicker {
+  margin: 0 0 0.1rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.back-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.back-text {
+  margin: 0;
+  font-size: 0.81rem;
+  line-height: 1.55;
+  color: rgba(246, 241, 228, 0.74);
+}
+
+.back-stack {
+  margin: 0;
+  font-size: 0.59rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(217, 171, 82, 0.9);
+  line-height: 1.5;
+}
+
+.back-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.48rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cream-soft);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s var(--ease-out);
+}
+
+.back-btn:hover,
+.back-btn:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+.back-btn.is-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.back-btn.is-gold:hover,
+.back-btn.is-gold:focus-visible {
+  background: var(--gold-bright);
+  color: var(--ink);
+}
+
+.back-close {
+  align-self: flex-start;
+  margin-top: 0.1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(246, 241, 228, 0.42);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.back-close::before {
+  content: "\21BA";
+  margin-right: 0.35rem;
+}
+
+.back-close:hover,
+.back-close:focus-visible {
+  color: var(--gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   The room, a live game in a dialog
+   -------------------------------------------------------------------------- */
+
+.room {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  border: 0;
+  background: transparent;
+  color: var(--cream);
+  overflow: visible;
+}
+
+.room[open] {
+  display: grid;
+  place-items: center;
+}
+
+.room::backdrop {
+  background: rgba(3, 14, 11, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.room-inner {
+  display: flex;
+  flex-direction: column;
+  width: min(1080px, 100%);
+  height: min(760px, 90vh);
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: var(--felt-800);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+
+.room[open] .room-inner {
+  animation: room-in 0.4s var(--ease-out);
+}
+
+@keyframes room-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+}
+
+.room-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 28, 22, 0.6);
+}
+
+.room-kicker {
+  margin: 0 0 0.15rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.room-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.room-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.room-link {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  transition: color 0.25s ease;
+}
+
+.room-link:hover,
+.room-link:focus-visible {
+  color: var(--gold-bright);
+}
+
+.room-close {
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cream-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.room-close:hover,
+.room-close:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.room-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #07351f;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+@media (max-width: 620px) {
+  .room-link {
+    display: none;
+  }
+
+  .room-inner {
+    height: min(720px, 88vh);
   }
 }
 
