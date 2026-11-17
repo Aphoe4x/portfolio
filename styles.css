@@ -917,7 +917,7 @@ html.is-loading .loader {
 
 .work-card--wide {
   grid-column: 1 / -1;
-  height: 228px;
+  height: 240px;
 }
 
 .card-tilt {
@@ -1916,6 +1916,27 @@ body.is-locked {
   transform: none;
 }
 
+/* Work cards get dealt, not just faded in */
+
+.work-card.reveal {
+  transform: translateY(30px) rotate(var(--deal, 0deg));
+  transition-duration: 0.85s;
+}
+
+.work-card.reveal:nth-child(2n) {
+  --deal: 1.2deg;
+  transform-origin: 100% 100%;
+}
+
+.work-card.reveal:nth-child(2n + 1) {
+  --deal: -1.2deg;
+  transform-origin: 0 100%;
+}
+
+.work-card.reveal.is-in {
+  transform: none;
+}
+
 html.is-loading .hero .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -2076,7 +2097,7 @@ html.is-loading .hero .reveal {
 
   .work-card,
   .work-card--wide {
-    height: 222px;
+    height: 236px;
   }
 
   .job-head {
