@@ -5,47 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Afolabi Abdulbasit Opeyemi | Software Engineer</title>
 <meta name="description" content="Backend and full-stack developer in Lagos. I build web products with PHP, Laravel and Node.js, and a few side projects that got out of hand." />
-<meta name="theme-color" content="#0b2e24" />
+<meta name="theme-color" content="#0b0a09" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <script src="main.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="felt" aria-hidden="true"></div>
+<div class="scene" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="topbar">
+<header class="masthead" id="masthead">
   <a class="brand" href="#top" aria-label="Aphoe, back to top">
-    <span class="brand-mark" aria-hidden="true">A</span>
-    <span class="brand-text">aphoe</span>
+    <span>aphoe</span><span class="brand-dot" aria-hidden="true"></span>
   </a>
 
   <nav class="nav" aria-label="Sections">
-    <a href="#about">About</a>
     <a href="#work">Work</a>
+    <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
   </nav>
 
-  <button class="shuffle-btn" id="shuffle" type="button">
-    <svg class="shuffle-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 7h3.5c1.2 0 2.2.6 2.9 1.6l5.2 7.8c.6 1 1.7 1.6 2.9 1.6H21" />
-      <path d="M3 17h3.5c1.2 0 2.2-.6 2.9-1.6l5.2-7.8C15.2 6.6 16.3 6 17.5 6H21" />
-      <path d="M18 3l3 3-3 3M18 15l3 3-3 3" />
-    </svg>
-    <span>Shuffle</span>
-  </button>
+  <div class="masthead-actions">
+    <button class="shuffle-btn" id="shuffle" type="button" aria-label="Shuffle the deck">
+      <svg class="shuffle-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 7h3.5c1.2 0 2.2.6 2.9 1.6l5.2 7.8c.6 1 1.7 1.6 2.9 1.6H21" />
+        <path d="M3 17h3.5c1.2 0 2.2-.6 2.9-1.6l5.2-7.8C15.2 6.6 16.3 6 17.5 6H21" />
+        <path d="M18 3l3 3-3 3M18 15l3 3-3 3" />
+      </svg>
+      <span class="shuffle-label">Shuffle</span>
+    </button>
+    <a class="pill" href="#contact">Contact</a>
+  </div>
 </header>
 
 <main id="main">
   <section class="hero" id="top">
-    <p class="eyebrow reveal">Lagos, Nigeria | Open to remote roles</p>
+    <p class="eyebrow reveal">
+      <span class="status-dot" aria-hidden="true"></span>
+      Lagos, Nigeria
+      <span class="eyebrow-slash">/</span>
+      Open to remote roles
+    </p>
 
     <div class="hand reveal" aria-hidden="true">
       <div class="hand-card" style="--n: 0; --rot: -13deg; --x: -160%; --y: 16px">
@@ -69,18 +79,18 @@
         <span class="card-corner card-corner--bottom"><b>O</b><i>&#9827;</i></span>
       </div>
       <div class="hand-card is-wild" style="--n: 4; --rot: 13deg; --x: 160%; --y: 16px">
-        <span class="card-corner"><b>20</b><i class="is-gold">&#9733;</i></span>
+        <span class="card-corner"><b>20</b><i class="is-accent">&#9733;</i></span>
         <span class="card-face">E</span>
         <span class="card-tail">WHOT</span>
-        <span class="card-corner card-corner--bottom"><b>20</b><i class="is-gold">&#9733;</i></span>
+        <span class="card-corner card-corner--bottom"><b>20</b><i class="is-accent">&#9733;</i></span>
       </div>
     </div>
     <p class="hand-caption reveal">Five cards, every one a thing I shipped</p>
 
     <h1 class="hero-title reveal">I build web products that <em>stay shipped</em>.</h1>
-    <p class="hero-identity reveal">Afolabi Abdulbasit Opeyemi, backend and full-stack developer</p>
+    <p class="hero-identity reveal">Afolabi Abdulbasit Opeyemi</p>
     <p class="hero-lede reveal">
-      Three years of PHP, Laravel and Node.js in production. Live shops, booking systems, WordPress sites, and a card game with real rooms. Pick a card to see the work.
+      Backend and full-stack developer. Three years of PHP, Laravel and Node.js in production. Live shops, booking systems, WordPress sites, and a card game with real rooms. Pick a card to see the work.
     </p>
     <div class="hero-actions reveal">
       <a class="btn btn-solid" href="#work">Pick a card</a>
@@ -88,60 +98,20 @@
     </div>
   </section>
 
-  <section class="section about" id="about">
-    <header class="section-head reveal">
-      <p class="section-tag">The player</p>
-      <h2 class="section-title">A backend developer who still <em>shows up to the table</em>.</h2>
-    </header>
-
-    <div class="about-grid">
-      <div class="about-copy reveal" style="--i: 1">
-        <p>
-          I am Afolabi Abdulbasit Opeyemi, a backend-leaning full-stack developer in Lagos. Most of my work is PHP and Laravel on the server, Node.js when a project calls for it, and interfaces built in plain JavaScript, React or Tailwind.
-        </p>
-        <p>
-          I've shipped for teams in the UK, Canada and Nigeria: a WordPress site for a national employment organization, payment flows for an art marketplace, a multi-company booking marketplace, an online shop, and a Whot game with realtime rooms. I finished HNG15 as a finalist along the way.
-        </p>
-        <p>
-          I like small tools that solve one problem well, tests that catch real mistakes, and code someone else can pick up on a Monday. When I'm not building, I'm usually losing at my own card game.
-        </p>
-      </div>
-
-      <div class="stat-deck reveal" style="--i: 2">
-        <div class="stat">
-          <span class="stat-value">3+</span>
-          <span class="stat-label">Years shipping</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">6</span>
-          <span class="stat-label">Live projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">3</span>
-          <span class="stat-label">Countries worked with</span>
-        </div>
-        <div class="stat">
-          <span class="stat-value">HNG15</span>
-          <span class="stat-label">Finalist</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section work" id="work">
     <header class="section-head reveal">
-      <p class="section-tag">The hand</p>
+      <p class="section-tag"><span>01</span> Work</p>
       <h2 class="section-title">Five cards. <em>Pick one up.</em></h2>
       <p class="section-lede">Every card is live. Flip it for the stack, the code, and a way in.</p>
     </header>
 
     <div class="work-grid">
-      <article class="work-card" style="--i: 0">
+      <article class="work-card">
         <div class="card-tilt">
           <div class="flip-inner">
             <div class="flip-face flip-front">
               <button class="card-hit" type="button" aria-expanded="false" aria-controls="back-whot" aria-labelledby="name-whot" aria-describedby="line-whot">
-                <span class="card-rank"><span>A</span><span class="card-suit is-gold">&#9733;</span></span>
+                <span class="card-rank"><span>A</span><span class="card-suit is-accent">&#9733;</span></span>
                 <span class="card-body">
                   <span class="card-name" id="name-whot">Whot</span>
                   <span class="card-line" id="line-whot">Nigerian Whot with a rules engine, an AI table and realtime rooms.</span>
@@ -150,7 +120,7 @@
                   <span class="card-stack">JavaScript, Node.js, Socket.IO, Docker</span>
                   <span class="card-flip-hint">Flip for links</span>
                 </span>
-                <span class="card-watermark is-gold" aria-hidden="true">&#9733;</span>
+                <span class="card-watermark is-accent" aria-hidden="true">&#9733;</span>
               </button>
             </div>
             <div class="flip-face flip-back" id="back-whot" inert>
@@ -164,7 +134,7 @@
               <p class="back-text">Play alone against the computer, or share a room code with a friend. The rules engine and room sync run on a Node.js server in Docker.</p>
               <p class="back-stack">JavaScript, Node.js, Socket.IO, Docker</p>
               <div class="back-actions">
-                <button class="back-btn is-gold" type="button" data-open-room="whot">Play here</button>
+                <button class="back-btn is-accent" type="button" data-open-room="whot">Play here</button>
                 <a class="back-btn" href="https://github.com/Aphoe4x/whot" target="_blank" rel="noopener noreferrer">Code</a>
               </div>
               <button class="back-close" type="button">Flip back</button>
@@ -173,7 +143,7 @@
         </div>
       </article>
 
-      <article class="work-card" style="--i: 1">
+      <article class="work-card">
         <div class="card-tilt">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -201,7 +171,7 @@
               <p class="back-text">Agents claim issues, submit pull requests with test proof, and humans gate the merges. Built at HNG15, with an agent work feed and escalating permissions.</p>
               <p class="back-stack">Next.js, TypeScript, Prisma, PostgreSQL</p>
               <div class="back-actions">
-                <a class="back-btn is-gold" href="https://ziki.dev" target="_blank" rel="noopener noreferrer">Live site</a>
+                <a class="back-btn is-accent" href="https://ziki.dev" target="_blank" rel="noopener noreferrer">Live site</a>
               </div>
               <button class="back-close" type="button">Flip back</button>
             </div>
@@ -209,7 +179,7 @@
         </div>
       </article>
 
-      <article class="work-card" style="--i: 2">
+      <article class="work-card">
         <div class="card-tilt">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -237,7 +207,7 @@
               <p class="back-text">Catalogue, cart, checkout and order history. Google sign in, Mailgun receipts, an installable PWA and an Expo app sharing one REST API.</p>
               <p class="back-stack">React, Node.js, Supabase</p>
               <div class="back-actions">
-                <a class="back-btn is-gold" href="https://shop-website-dun.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
+                <a class="back-btn is-accent" href="https://shop-website-dun.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
                 <a class="back-btn" href="https://github.com/Aphoe4x/shop-website" target="_blank" rel="noopener noreferrer">Code</a>
               </div>
               <button class="back-close" type="button">Flip back</button>
@@ -246,7 +216,7 @@
         </div>
       </article>
 
-      <article class="work-card" style="--i: 3">
+      <article class="work-card">
         <div class="card-tilt">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -274,7 +244,7 @@
               <p class="back-text">Companies publish services and prices, clients compare and book. Double bookings are stopped at the database layer with transactional locking and unique indexes.</p>
               <p class="back-stack">Laravel, MySQL</p>
               <div class="back-actions">
-                <a class="back-btn is-gold" href="https://book-with-aphoe.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                <a class="back-btn is-accent" href="https://book-with-aphoe.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
                 <a class="back-btn" href="https://github.com/Aphoe4x/mini-booking-system" target="_blank" rel="noopener noreferrer">Code</a>
               </div>
               <button class="back-close" type="button">Flip back</button>
@@ -283,7 +253,7 @@
         </div>
       </article>
 
-      <article class="work-card" style="--i: 4">
+      <article class="work-card">
         <div class="card-tilt">
           <div class="flip-inner">
             <div class="flip-face flip-front">
@@ -311,7 +281,7 @@
               <p class="back-text">Priorities, due dates, filters, a calendar, drag and drop, and a Pomodoro timer. Vanilla HTML, CSS and JavaScript with no build step and no backend.</p>
               <p class="back-stack">HTML, CSS, JavaScript</p>
               <div class="back-actions">
-                <a class="back-btn is-gold" href="https://todo-list-afolabi.netlify.app" target="_blank" rel="noopener noreferrer">Live site</a>
+                <a class="back-btn is-accent" href="https://todo-list-afolabi.netlify.app" target="_blank" rel="noopener noreferrer">Live site</a>
                 <a class="back-btn" href="https://github.com/Aphoe4x/todo-list" target="_blank" rel="noopener noreferrer">Code</a>
               </div>
               <button class="back-close" type="button">Flip back</button>
@@ -321,10 +291,50 @@
       </article>
     </div>
   </section>
+
+  <section class="section about" id="about">
+    <header class="section-head reveal">
+      <p class="section-tag"><span>02</span> About</p>
+      <h2 class="section-title">A backend developer who still <em>shows up to the table</em>.</h2>
+    </header>
+
+    <div class="about-grid">
+      <div class="about-copy reveal" style="--i: 1">
+        <p>
+          I am Afolabi Abdulbasit Opeyemi, a backend-leaning full-stack developer in Lagos. Most of my work is PHP and Laravel on the server, Node.js when a project calls for it, and interfaces built in plain JavaScript, React or Tailwind.
+        </p>
+        <p>
+          I've shipped for teams in the UK, Canada and Nigeria: a WordPress site for a national employment organization, payment flows for an art marketplace, a multi-company booking marketplace, an online shop, and a Whot game with realtime rooms. I finished HNG15 as a finalist along the way.
+        </p>
+        <p>
+          I like small tools that solve one problem well, tests that catch real mistakes, and code someone else can pick up on a Monday. When I'm not building, I'm usually losing at my own card game.
+        </p>
+      </div>
+
+      <div class="stat-deck reveal" style="--i: 2">
+        <div class="stat">
+          <span class="stat-value">3+</span>
+          <span class="stat-label">years shipping</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">6</span>
+          <span class="stat-label">live projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">3</span>
+          <span class="stat-label">countries worked with</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">HNG15</span>
+          <span class="stat-label">finalist</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
-  <p class="footer-note">Afolabi Abdulbasit Opeyemi. Built on a felt table with plain HTML, CSS and JavaScript.</p>
+  <p class="footer-note">Afolabi Abdulbasit Opeyemi. Built from scratch with plain HTML, CSS and JavaScript.</p>
   <ul class="footer-links">
     <li><a href="https://github.com/Aphoe4x">GitHub</a></li>
     <li><a href="https://x.com/aphoooe">X</a></li>

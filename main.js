@@ -10,6 +10,52 @@
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ------------------------------------------------------------------------
+     Masthead: quiet until the page moves
+     ---------------------------------------------------------------------- */
+
+  var masthead = document.getElementById('masthead');
+
+  if (masthead) {
+    var syncMasthead = function () {
+      masthead.classList.toggle('is-stuck', window.scrollY > 12);
+    };
+
+    window.addEventListener('scroll', syncMasthead, { passive: true });
+    syncMasthead();
+  }
+
+  /* ------------------------------------------------------------------------
+     Scrollspy: a dot under the section you are reading
+     ---------------------------------------------------------------------- */
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var spySections = navLinks
+    .map(function (link) {
+      return document.querySelector(link.getAttribute('href'));
+    })
+    .filter(Boolean);
+
+  if (spySections.length && 'IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var hash = '#' + entry.target.id;
+
+          navLinks.forEach(function (link) {
+            link.classList.toggle('is-active', link.getAttribute('href') === hash);
+          });
+        });
+      },
+      { rootMargin: '-42% 0px -52% 0px', threshold: 0 }
+    );
+
+    spySections.forEach(function (section) {
+      spy.observe(section);
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Reveal sections as they come up the table
      ---------------------------------------------------------------------- */
 
