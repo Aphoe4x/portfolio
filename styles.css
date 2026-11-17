@@ -302,13 +302,14 @@ button {
 
 .hero {
   position: relative;
-  padding: clamp(3rem, 9vh, 7rem) var(--pad-x) clamp(3.5rem, 10vh, 8rem);
-  max-width: 1180px;
+  max-width: 1100px;
   margin: 0 auto;
+  padding: clamp(2.2rem, 5vh, 4rem) var(--pad-x) clamp(3.5rem, 9vh, 7rem);
+  text-align: center;
 }
 
 .eyebrow {
-  margin: 0 0 1.1rem;
+  margin: 0 0 1.4rem;
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.24em;
@@ -316,18 +317,147 @@ button {
   color: var(--gold);
 }
 
-.hero-title {
-  margin: 0 0 1.6rem;
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7.4vw, 5.6rem);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -0.028em;
-  text-wrap: balance;
+/* --------------------------------------------------------------------------
+   The hand
+   -------------------------------------------------------------------------- */
+
+.hand {
+  --w: clamp(74px, 11.6vw, 132px);
+  position: relative;
+  width: min(94vw, 820px);
+  height: calc(var(--w) * 1.62);
+  margin: 0 auto;
 }
 
-.hero-line {
-  display: block;
+.hand-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--w);
+  height: calc(var(--w) * 1.4);
+  margin-top: calc(var(--w) * -0.7);
+  margin-left: calc(var(--w) * -0.5);
+  border-radius: 9px;
+  background: linear-gradient(158deg, #fdfbf3 0%, #f6f1e4 46%, #e9e0cd 100%);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  z-index: calc(10 + var(--n));
+  transform: translate3d(var(--x), var(--y), 0) rotate(var(--rot));
+  animation: deal 0.95s var(--ease-out) backwards;
+  animation-delay: calc(160ms + var(--n) * 120ms);
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s ease;
+  will-change: transform;
+}
+
+/* Inner hairline, like a printed border. */
+.hand-card::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(18, 32, 26, 0.12);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.hand-card.is-wild {
+  background: linear-gradient(158deg, #fdf6e4 0%, #f7ead0 48%, #ecd9b2 100%);
+  box-shadow: var(--shadow-card), 0 0 0 2px var(--gold-bright), 0 0 40px -6px rgba(242, 205, 124, 0.55);
+}
+
+.hand-card.is-wild::after {
+  border-color: rgba(184, 64, 47, 0.28);
+}
+
+.card-face {
+  font-family: var(--font-display);
+  font-size: calc(var(--w) * 0.54);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.card-corner {
+  position: absolute;
+  top: 7px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  font-size: calc(var(--w) * 0.13);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-corner i {
+  font-style: normal;
+  font-size: calc(var(--w) * 0.12);
+}
+
+.card-corner--bottom {
+  top: auto;
+  left: auto;
+  right: 8px;
+  bottom: 7px;
+  transform: rotate(180deg);
+}
+
+.card-corner .is-red {
+  color: var(--red);
+}
+
+.card-corner .is-gold {
+  color: #b07d21;
+}
+
+.card-tail {
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: calc(var(--w) * 0.075);
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: #8a6520;
+}
+
+@keyframes deal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 62vh, 0) rotate(0deg) scale(0.84);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(var(--x), var(--y), 0) rotate(var(--rot)) scale(1);
+  }
+}
+
+@media (hover: hover) {
+  .hand-card:hover {
+    transform: translate3d(var(--x), calc(var(--y) - 18px), 0) rotate(calc(var(--rot) * 0.35)) scale(1.05);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+.hand-caption {
+  margin: 0.4rem 0 clamp(1.8rem, 4vw, 3rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+.hero-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
 }
 
 .hero-title em {
@@ -335,10 +465,17 @@ button {
   color: var(--gold-bright);
 }
 
+.hero-identity {
+  margin: 0 0 1.1rem;
+  font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+  letter-spacing: 0.05em;
+  color: var(--cream-soft);
+}
+
 .hero-lede {
-  max-width: 46ch;
-  margin: 0 0 2.2rem;
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  max-width: 56ch;
+  margin: 0 auto 2.2rem;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
   line-height: 1.65;
   color: var(--cream-dim);
 }
@@ -346,6 +483,7 @@ button {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.8rem;
 }
 
@@ -389,6 +527,133 @@ button {
   border-color: var(--gold);
   color: var(--gold-bright);
   transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vh, 7rem) var(--pad-x);
+}
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+
+.section-tag {
+  margin: 0 0 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 3.3rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   About
+   -------------------------------------------------------------------------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.about-copy p {
+  margin: 0 0 1.1rem;
+  color: var(--cream-dim);
+  font-size: clamp(0.98rem, 1.4vw, 1.06rem);
+  line-height: 1.72;
+  max-width: 62ch;
+}
+
+.about-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-copy p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-size: 3.3em;
+  line-height: 0.82;
+  color: var(--gold-bright);
+}
+
+.stat-deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.stat {
+  position: relative;
+  padding: 1.15rem 1.2rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(158deg, rgba(246, 241, 228, 0.065), rgba(246, 241, 228, 0.015));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.stat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0.7;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  line-height: 1.05;
+  color: var(--gold-bright);
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.67rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+@media (max-width: 860px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-deck {
+    max-width: 26rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -538,6 +803,12 @@ button {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .hand-card {
+    animation: none;
+    opacity: 1;
+    transform: translate3d(var(--x), var(--y), 0) rotate(var(--rot));
   }
 
   .ghost-card {
