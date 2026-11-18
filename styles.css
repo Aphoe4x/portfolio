@@ -1158,6 +1158,48 @@ html.is-loading .loader {
   pointer-events: none;
 }
 
+/* The Ziki figure: three steps from agent to human */
+
+.ziki-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: min(330px, 94%);
+  padding: 1rem;
+}
+
+.ziki-flow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #c2c2bc;
+  white-space: nowrap;
+}
+
+.ziki-flow-dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4c4c47;
+}
+
+.ziki-flow-dot.is-mid {
+  background: var(--accent);
+}
+
+.ziki-flow-dot.is-done {
+  background: var(--paper);
+}
+
 /* Back */
 
 .flip-back {
@@ -1656,7 +1698,7 @@ html.is-loading .loader {
 
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
 
@@ -2047,6 +2089,10 @@ html.is-loading .hero .reveal {
 
   .contact-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-card:last-child {
+    grid-column: 1 / -1;
   }
 }
 
