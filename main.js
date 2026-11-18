@@ -478,19 +478,56 @@
     copyBtn.addEventListener('click', function () {
       var value = copyBtn.getAttribute('data-copy');
       var label = copyBtn.textContent;
-      var done = function () {
-        copyBtn.textContent = 'copied';
-        copyBtn.classList.add('is-done');
+
+      var reset = function () {
         window.setTimeout(function () {
           copyBtn.textContent = label;
           copyBtn.classList.remove('is-done');
         }, 1600);
       };
 
+      var done = function () {
+        copyBtn.textContent = 'copied';
+        copyBtn.classList.add('is-done');
+        reset();
+      };
+
+      var failed = function () {
+        copyBtn.textContent = 'copy failed';
+        reset();
+      };
+
+      var legacy = function () {
+        var field = document.createElement('textarea');
+        field.value = value;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.top = '-1000px';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+
+        var copied = false;
+
+        try {
+          copied = document.execCommand('copy');
+        } catch (error) {
+          copied = false;
+        }
+
+        document.body.removeChild(field);
+
+        if (copied) {
+          done();
+        } else {
+          failed();
+        }
+      };
+
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(value).then(done, function () {});
+        navigator.clipboard.writeText(value).then(done, legacy);
       } else {
-        done();
+        legacy();
       }
     });
   }
