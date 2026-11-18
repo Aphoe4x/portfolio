@@ -53,7 +53,7 @@
     openTable();
   } else {
     var start = null;
-    var duration = 950;
+    var duration = 400;
 
     var tick = function (now) {
       if (start === null) start = now;
@@ -290,63 +290,6 @@
   }
 
   /* ------------------------------------------------------------------------
-     The card that follows the cursor, only over the spread
-     ---------------------------------------------------------------------- */
-
-  var ghost = document.getElementById('ghost');
-  var spread = document.querySelector('.work-grid');
-
-  if (ghost && spread && finePointer && !reduceMotion) {
-    var targetX = 0;
-    var targetY = 0;
-    var currentX = 0;
-    var currentY = 0;
-    var frame = null;
-
-    var step = function () {
-      currentX += (targetX - currentX) * 0.16;
-      currentY += (targetY - currentY) * 0.16;
-
-      var tilt = Math.max(-12, Math.min(12, (targetX - currentX) * 0.1));
-
-      ghost.style.transform =
-        'translate3d(' + (currentX + 20) + 'px,' + (currentY + 16) + 'px,0)' +
-        ' rotate(' + (tilt - 8) + 'deg)';
-
-      if (Math.abs(targetX - currentX) > 0.4 || Math.abs(targetY - currentY) > 0.4) {
-        frame = window.requestAnimationFrame(step);
-      } else {
-        frame = null;
-      }
-    };
-
-    spread.addEventListener('pointerenter', function () {
-      ghost.classList.add('is-live');
-    });
-
-    spread.addEventListener('pointerleave', function () {
-      ghost.classList.remove('is-live');
-    });
-
-    window.addEventListener(
-      'pointermove',
-      function (event) {
-        targetX = event.clientX;
-        targetY = event.clientY;
-
-        if (!ghost.classList.contains('is-live')) return;
-
-        if (frame === null) {
-          currentX = targetX;
-          currentY = targetY;
-          frame = window.requestAnimationFrame(step);
-        }
-      },
-      { passive: true }
-    );
-  }
-
-  /* ------------------------------------------------------------------------
      Work cards: flip, tilt, and reset
      ---------------------------------------------------------------------- */
 
@@ -514,7 +457,8 @@
         closeRoom();
       }
 
-      void spread.offsetWidth;
+      var grid = document.querySelector('.work-grid');
+      if (grid) void grid.offsetWidth;
 
       window.setTimeout(function () {
         workCards.forEach(function (card) {

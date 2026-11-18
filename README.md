@@ -23,6 +23,8 @@ index.html        markup for every section
 styles.css        all styling, tokens at the top
 main.js           loader, fan, rail spy, reveals, flips, shuffle, dialogs
 assets/favicon.svg
+assets/touch-icon.png
+assets/og.png     1200x630 share card
 assets/projects/  project logos
 ```
 
@@ -30,6 +32,6 @@ assets/projects/  project logos
 
 - Motion respects `prefers-reduced-motion`. Reduced motion gets the same content, static.
 - No em-dashes, no middle dots. Plain copy on purpose.
-- The loader only runs once per browser session.
+- The loader only runs once per browser session, and counts in for 400ms.
 - Live Whot opens in a native dialog, with the game mounted on first use.
 - Built and shipped in small commits, one section at a time.

@@ -1943,40 +1943,6 @@ html.is-loading .hero .reveal {
 }
 
 /* --------------------------------------------------------------------------
-   Cursor card, only over the work grid
-   -------------------------------------------------------------------------- */
-
-.ghost-card {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 70;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 42px;
-  border-radius: 4px;
-  background: var(--white);
-  color: var(--ink);
-  box-shadow: 0 12px 26px rgba(10, 10, 10, 0.28);
-  pointer-events: none;
-  opacity: 0;
-  transform: translate3d(-120px, -120px, 0);
-  transition: opacity 0.3s ease;
-  will-change: transform;
-}
-
-.ghost-card.is-live {
-  opacity: 0.92;
-}
-
-.ghost-star {
-  font-size: 0.7rem;
-  line-height: 1;
-  color: var(--accent-deep);
-}
-
-/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 
@@ -2240,9 +2206,5 @@ html.is-loading .hero .reveal {
   html.is-loading .hero .reveal {
     opacity: 1;
     transform: none;
-  }
-
-  .ghost-card {
-    display: none;
   }
 }
