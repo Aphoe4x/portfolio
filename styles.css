@@ -168,72 +168,6 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   Loader
-   -------------------------------------------------------------------------- */
-
-.loader {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  place-items: center;
-  background: var(--ink);
-  color: var(--white);
-  transition: opacity 0.55s var(--ease);
-}
-
-html.is-loading .loader {
-  display: grid;
-}
-
-.loader.is-done {
-  display: grid;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loader-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.9rem;
-  width: min(280px, 70vw);
-}
-
-.loader-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.loader-count {
-  font-family: var(--font-display);
-  font-size: 4.5rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-}
-
-.loader-bar {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.14);
-  overflow: hidden;
-}
-
-.loader-bar span {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--accent);
-}
-
-/* --------------------------------------------------------------------------
    Sidebar
    -------------------------------------------------------------------------- */
 
@@ -313,8 +247,7 @@ html.is-loading .loader {
   color: rgba(255, 255, 255, 0.42);
 }
 
-.tile-foot .pulse,
-.loader-mark .pulse {
+.tile-foot .pulse {
   width: 5px;
   height: 5px;
 }
@@ -1698,8 +1631,9 @@ html.is-loading .loader {
 
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
+  max-width: 44rem;
 }
 
 .contact-card {
@@ -1979,11 +1913,6 @@ body.is-locked {
   transform: none;
 }
 
-html.is-loading .hero .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
 /* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
@@ -2089,10 +2018,6 @@ html.is-loading .hero .reveal {
 
   .contact-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .contact-card:last-child {
-    grid-column: 1 / -1;
   }
 }
 
@@ -2248,8 +2173,7 @@ html.is-loading .hero .reveal {
     scroll-behavior: auto !important;
   }
 
-  .reveal,
-  html.is-loading .hero .reveal {
+  .reveal {
     opacity: 1;
     transform: none;
   }

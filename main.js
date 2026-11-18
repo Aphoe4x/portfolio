@@ -8,76 +8,14 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var root = document.documentElement;
-
-  /* ------------------------------------------------------------------------
-     A quick count in, then the table opens
-     ---------------------------------------------------------------------- */
-
-  var loader = document.getElementById('loader');
-  var loaderCount = document.getElementById('loader-count');
-  var loaderBar = document.getElementById('loader-bar');
   var fan = document.getElementById('fan');
 
-  var seen = false;
+  /* ------------------------------------------------------------------------
+     The hand arrives
+     ---------------------------------------------------------------------- */
 
-  try {
-    seen = window.sessionStorage.getItem('aphoe-dealt') === '1';
-  } catch (error) {
-    seen = false;
-  }
-
-  function openTable() {
-    root.classList.remove('is-loading');
-    root.classList.add('is-ready');
-
-    if (loader) {
-      loader.classList.add('is-done');
-      window.setTimeout(function () {
-        loader.hidden = true;
-      }, 620);
-    }
-
-    if (fan && !reduceMotion) {
-      fan.classList.add('is-dealt');
-    }
-
-    try {
-      window.sessionStorage.setItem('aphoe-dealt', '1');
-    } catch (error) {
-      /* private mode, never mind */
-    }
-  }
-
-  if (!loader || reduceMotion || seen) {
-    openTable();
-  } else {
-    var start = null;
-    var duration = 400;
-
-    var tick = function (now) {
-      if (start === null) start = now;
-
-      var progress = Math.min(1, (now - start) / duration);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var value = Math.round(eased * 100);
-
-      if (loaderCount) {
-        loaderCount.textContent = String(value).padStart(3, '0');
-      }
-
-      if (loaderBar) {
-        loaderBar.style.width = value + '%';
-      }
-
-      if (progress < 1) {
-        window.requestAnimationFrame(tick);
-      } else {
-        openTable();
-      }
-    };
-
-    window.requestAnimationFrame(tick);
+  if (fan && !reduceMotion) {
+    fan.classList.add('is-dealt');
   }
 
   /* ------------------------------------------------------------------------
