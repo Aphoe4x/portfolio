@@ -30,9 +30,15 @@ assets/projects/  project logos
 
 ## Deploy
 
-The site is published with GitHub Pages at https://aphoe.github.io/portfolio/.
+The site is published with GitHub Pages at https://aphoe4x.github.io/portfolio/.
 
-Pages serves the repo root of `aphoe/portfolio` on `main`. There is no build step, so a push is a deploy. `.nojekyll` keeps Pages from running the files through Jekyll. Absolute `canonical`, `og:url` and share image URLs point at that address, so if the address ever changes, update them in one pass at the top of `index.html`.
+Pages serves the repo root of `Aphoe4x/portfolio` on `main`. There is no build step, so a push is a deploy. `.nojekyll` keeps Pages from running the files through Jekyll. Absolute `canonical`, `og:url` and share image URLs point at that address, so if the address ever changes, update them in one pass at the top of `index.html`.
+
+This repo stays the place where the work happens. To publish:
+
+```powershell
+git push pages main
+```
 
 ## Notes
 
