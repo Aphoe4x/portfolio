@@ -28,6 +28,12 @@ assets/og.png     1200x630 share card
 assets/projects/  project logos
 ```
 
+## Deploy
+
+The site is published with GitHub Pages at https://aphoe.github.io/portfolio/.
+
+Pages serves the repo root of `aphoe/portfolio` on `main`. There is no build step, so a push is a deploy. `.nojekyll` keeps Pages from running the files through Jekyll. Absolute `canonical`, `og:url` and share image URLs point at that address, so if the address ever changes, update them in one pass at the top of `index.html`.
+
 ## Notes
 
 - Motion respects `prefers-reduced-motion`. Reduced motion gets the same content, static.
