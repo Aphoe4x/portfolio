@@ -45,5 +45,6 @@ git push pages main
 - Motion respects `prefers-reduced-motion`. Reduced motion gets the same content, static.
 - No em-dashes, no middle dots. Plain copy on purpose.
 - The hand deals itself in on load. There is no loading screen to wait through.
-- Live Whot opens in a native dialog, with the game mounted on first use.
+- On mobile the rail sticks to the top of the screen when you scroll down.
+- Whot is live at https://naija-whot.start.ng/. From the portfolio, "Play here" opens it in a native dialog; the game is mounted on first use. The room dialog also links straight to it.
 - Built and shipped in small commits, one section at a time.
