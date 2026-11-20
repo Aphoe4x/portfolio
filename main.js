@@ -79,34 +79,6 @@
   }
 
   /* ------------------------------------------------------------------------
-     Lagos clock
-     ---------------------------------------------------------------------- */
-
-  var clock = document.getElementById('clock');
-
-  if (clock) {
-    var readClock = function () {
-      var time;
-
-      try {
-        time = new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Africa/Lagos',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        }).format(new Date());
-      } catch (error) {
-        time = new Date().toTimeString().slice(0, 5);
-      }
-
-      clock.textContent = time;
-    };
-
-    readClock();
-    window.setInterval(readClock, 20000);
-  }
-
-  /* ------------------------------------------------------------------------
      The rail: which seat are we at
      ---------------------------------------------------------------------- */
 
