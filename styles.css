@@ -1478,6 +1478,29 @@ button {
   gap: 0.7rem;
 }
 
+/* The row plays itself, and the cloned set makes the loop seamless */
+
+@keyframes suit-loop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-1 * var(--loop, 0px)));
+  }
+}
+
+.suits.is-looping {
+  animation: suit-loop 22s linear infinite;
+  will-change: transform;
+}
+
+.suits.is-paused,
+.suits-clip:hover .suits.is-looping,
+.suits-clip:focus-within .suits.is-looping {
+  animation-play-state: paused;
+}
+
 .suit {
   flex: 0 0 30%;
   max-width: 30%;

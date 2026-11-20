@@ -191,35 +191,65 @@
   }
 
   /* ------------------------------------------------------------------------
-     Skill cards, one row that slides sideways with the scroll
+     Skill cards, one row that loops on its own
      ---------------------------------------------------------------------- */
 
   var suitsClip = document.querySelector('.suits-clip');
   var suitsRow = suitsClip ? suitsClip.querySelector('.suits') : null;
 
-  var paintSuits = function () {
-    if (!suitsClip || !suitsRow) return;
-
-    var maxShift = suitsClip.scrollWidth - suitsClip.clientWidth;
-
-    if (maxShift <= 0) {
-      suitsClip.scrollLeft = 0;
-      return;
-    }
-
-    var vh = window.innerHeight || 0;
-    var top = suitsClip.getBoundingClientRect().top;
-    var progress = (vh * 0.92 - top) / (vh * 0.72);
-    progress = Math.max(0, Math.min(1, progress));
-
-    /* Linear, so the row moves in step with the scroll, no easing lag */
-    suitsClip.scrollLeft = Math.round(maxShift * progress);
-  };
-
   if (suitsClip && suitsRow && !reduceMotion) {
-    paintSuits();
-    window.addEventListener('scroll', paintSuits, { passive: true });
-    window.addEventListener('resize', paintSuits, { passive: true });
+    var suitCards = Array.prototype.slice.call(suitsRow.children);
+
+    suitCards.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.classList.remove('reveal', 'is-in');
+      clone.removeAttribute('style');
+      clone.setAttribute('aria-hidden', 'true');
+      suitsRow.appendChild(clone);
+    });
+
+    var setSuitLoop = function () {
+      var first = suitsRow.children[0];
+      var copy = suitsRow.children[suitCards.length];
+
+      if (!first || !copy) return;
+
+      var distance = copy.offsetLeft - first.offsetLeft;
+
+      if (distance <= 0) return;
+
+      /* Restart so a changed width does not jump mid loop */
+      suitsRow.classList.remove('is-looping');
+      suitsRow.style.setProperty('--loop', distance + 'px');
+      void suitsRow.offsetWidth;
+      suitsRow.classList.add('is-looping');
+    };
+
+    setSuitLoop();
+
+    var suitResize = null;
+
+    window.addEventListener(
+      'resize',
+      function () {
+        window.clearTimeout(suitResize);
+        suitResize = window.setTimeout(setSuitLoop, 160);
+      },
+      { passive: true }
+    );
+
+    if ('IntersectionObserver' in window) {
+      var suitWatch = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            suitsRow.classList.toggle('is-paused', !entry.isIntersecting);
+          });
+        },
+        { rootMargin: '120px' }
+      );
+
+      suitWatch.observe(suitsClip);
+    }
   }
 
   /* ------------------------------------------------------------------------
