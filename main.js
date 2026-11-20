@@ -191,41 +191,46 @@
   }
 
   /* ------------------------------------------------------------------------
-     Skill cards drift in with the scroll
+     Skill cards slide sideways with the scroll on phones
      ---------------------------------------------------------------------- */
 
-  var suits = Array.prototype.slice.call(document.querySelectorAll('.suit'));
-  var slideQueued = false;
+  var suitsClip = document.querySelector('.suits-clip');
+  var suitsRow = suitsClip ? suitsClip.querySelector('.suits') : null;
+  var suitsMobile = window.matchMedia('(max-width: 720px)');
+  var suitsQueued = false;
 
-  var paintSlides = function () {
-    slideQueued = false;
+  var paintSuits = function () {
+    suitsQueued = false;
+
+    if (!suitsClip || !suitsRow) return;
+
+    var maxShift = suitsClip.scrollWidth - suitsClip.clientWidth;
+
+    if (!suitsMobile.matches || maxShift <= 0) {
+      suitsClip.scrollLeft = 0;
+      return;
+    }
 
     var vh = window.innerHeight || 0;
-    var start = vh * 0.98;
-    var span = vh * 0.43;
+    var top = suitsClip.getBoundingClientRect().top;
+    var progress = (vh * 0.92 - top) / (vh * 0.72);
+    progress = Math.max(0, Math.min(1, progress));
 
-    suits.forEach(function (el, index) {
-      var top = el.getBoundingClientRect().top;
-      var progress = (start - top) / span;
-      progress = Math.max(0, Math.min(1, progress));
+    var eased = 1 - Math.pow(1 - progress, 3);
 
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var distance = 80 + index * 8;
-
-      el.style.setProperty('--slide', (-distance * (1 - eased)).toFixed(1) + 'px');
-    });
+    suitsClip.scrollLeft = Math.round(maxShift * eased);
   };
 
-  var queueSlides = function () {
-    if (slideQueued) return;
-    slideQueued = true;
-    window.requestAnimationFrame(paintSlides);
+  var queueSuits = function () {
+    if (suitsQueued) return;
+    suitsQueued = true;
+    window.requestAnimationFrame(paintSuits);
   };
 
-  if (suits.length && !reduceMotion) {
-    paintSlides();
-    window.addEventListener('scroll', queueSlides, { passive: true });
-    window.addEventListener('resize', queueSlides, { passive: true });
+  if (suitsClip && suitsRow && !reduceMotion) {
+    paintSuits();
+    window.addEventListener('scroll', queueSuits, { passive: true });
+    window.addEventListener('resize', queueSuits, { passive: true });
   }
 
   /* ------------------------------------------------------------------------

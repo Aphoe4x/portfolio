@@ -1892,20 +1892,10 @@ body.is-locked {
   transform: none;
 }
 
-/* Skill cards drift in from the left, tied to the scroll (#skills) */
+/* Skill cards: the row slides sideways on mobile (#skills) */
 
-.suit.reveal {
-  transform: translateX(var(--slide, -28px));
-  transition: opacity 0.7s var(--ease), transform 0.12s linear;
-}
-
-.suit.reveal.is-in {
-  transform: translateX(var(--slide, 0px));
-}
-
-/* The reveal rule wins on specificity, so re-assert the hover nudge */
 .suit.reveal.is-in:hover {
-  transform: translateY(-4px) translateX(calc(var(--slide, 0px) - 6px));
+  transform: translateY(-4px) translateX(-6px);
 }
 
 /* Work cards get dealt, not just faded in */
@@ -2194,6 +2184,41 @@ body.is-locked {
 }
 
 /* --------------------------------------------------------------------------
+   Skills on phones, one row that slides sideways with the scroll
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .suits-clip {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .suits-clip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .suits {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.7rem;
+  }
+
+  .suit {
+    flex: 0 0 76%;
+    max-width: 76%;
+  }
+
+  /* The row slides as a whole on phones, so the cards are never hidden */
+  .suit.reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Reduced motion
    -------------------------------------------------------------------------- */
 
@@ -2213,10 +2238,6 @@ body.is-locked {
 
   .reveal {
     opacity: 1;
-    transform: none;
-  }
-
-  .suit.reveal {
     transform: none;
   }
 }
