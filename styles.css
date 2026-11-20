@@ -1458,13 +1458,29 @@ button {
    Skills, the four suits
    -------------------------------------------------------------------------- */
 
+.suits-clip {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 0 22px;
+  margin: -6px 0 -22px;
+}
+
+.suits-clip::-webkit-scrollbar {
+  display: none;
+}
+
 .suits {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
   gap: 0.7rem;
 }
 
 .suit {
+  flex: 0 0 30%;
+  max-width: 30%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1892,9 +1908,15 @@ body.is-locked {
   transform: none;
 }
 
-/* Skill cards: the row slides sideways on mobile (#skills) */
+/* The skill row slides as one piece, so the cards stay visible */
 
-.suit.reveal.is-in:hover {
+.suit.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Re-assert the hover nudge over the rule above */
+.suit.reveal:hover {
   transform: translateY(-4px) translateX(-6px);
 }
 
@@ -2036,8 +2058,9 @@ body.is-locked {
     max-width: 30rem;
   }
 
-  .suits {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .suit {
+    flex-basis: 44%;
+    max-width: 44%;
   }
 
   .contact-cards {
@@ -2134,10 +2157,6 @@ body.is-locked {
     font-size: 1.65rem;
   }
 
-  .suits {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .suit-head {
     margin-bottom: 0.9rem;
   }
@@ -2184,37 +2203,13 @@ body.is-locked {
 }
 
 /* --------------------------------------------------------------------------
-   Skills on phones, one row that slides sideways with the scroll
+   Skills on narrow screens, the row shows fewer cards at a time
    -------------------------------------------------------------------------- */
 
 @media (max-width: 720px) {
-  .suits-clip {
-    overflow-x: auto;
-    overflow-y: hidden;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .suits-clip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .suits {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0.7rem;
-  }
-
   .suit {
     flex: 0 0 76%;
     max-width: 76%;
-  }
-
-  /* The row slides as a whole on phones, so the cards are never hidden */
-  .suit.reveal {
-    opacity: 1;
-    transform: none;
   }
 }
 

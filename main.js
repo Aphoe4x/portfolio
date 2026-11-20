@@ -191,22 +191,18 @@
   }
 
   /* ------------------------------------------------------------------------
-     Skill cards slide sideways with the scroll on phones
+     Skill cards, one row that slides sideways with the scroll
      ---------------------------------------------------------------------- */
 
   var suitsClip = document.querySelector('.suits-clip');
   var suitsRow = suitsClip ? suitsClip.querySelector('.suits') : null;
-  var suitsMobile = window.matchMedia('(max-width: 720px)');
-  var suitsQueued = false;
 
   var paintSuits = function () {
-    suitsQueued = false;
-
     if (!suitsClip || !suitsRow) return;
 
     var maxShift = suitsClip.scrollWidth - suitsClip.clientWidth;
 
-    if (!suitsMobile.matches || maxShift <= 0) {
+    if (maxShift <= 0) {
       suitsClip.scrollLeft = 0;
       return;
     }
@@ -216,21 +212,14 @@
     var progress = (vh * 0.92 - top) / (vh * 0.72);
     progress = Math.max(0, Math.min(1, progress));
 
-    var eased = 1 - Math.pow(1 - progress, 3);
-
-    suitsClip.scrollLeft = Math.round(maxShift * eased);
-  };
-
-  var queueSuits = function () {
-    if (suitsQueued) return;
-    suitsQueued = true;
-    window.requestAnimationFrame(paintSuits);
+    /* Linear, so the row moves in step with the scroll, no easing lag */
+    suitsClip.scrollLeft = Math.round(maxShift * progress);
   };
 
   if (suitsClip && suitsRow && !reduceMotion) {
     paintSuits();
-    window.addEventListener('scroll', queueSuits, { passive: true });
-    window.addEventListener('resize', queueSuits, { passive: true });
+    window.addEventListener('scroll', paintSuits, { passive: true });
+    window.addEventListener('resize', paintSuits, { passive: true });
   }
 
   /* ------------------------------------------------------------------------
