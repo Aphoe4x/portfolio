@@ -191,6 +191,44 @@
   }
 
   /* ------------------------------------------------------------------------
+     Skill cards drift in with the scroll
+     ---------------------------------------------------------------------- */
+
+  var suits = Array.prototype.slice.call(document.querySelectorAll('.suit'));
+  var slideQueued = false;
+
+  var paintSlides = function () {
+    slideQueued = false;
+
+    var vh = window.innerHeight || 0;
+    var start = vh * 0.98;
+    var span = vh * 0.43;
+
+    suits.forEach(function (el, index) {
+      var top = el.getBoundingClientRect().top;
+      var progress = (start - top) / span;
+      progress = Math.max(0, Math.min(1, progress));
+
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var distance = 80 + index * 8;
+
+      el.style.setProperty('--slide', (-distance * (1 - eased)).toFixed(1) + 'px');
+    });
+  };
+
+  var queueSlides = function () {
+    if (slideQueued) return;
+    slideQueued = true;
+    window.requestAnimationFrame(paintSlides);
+  };
+
+  if (suits.length && !reduceMotion) {
+    paintSlides();
+    window.addEventListener('scroll', queueSlides, { passive: true });
+    window.addEventListener('resize', queueSlides, { passive: true });
+  }
+
+  /* ------------------------------------------------------------------------
      Stats count up like chips being stacked
      ---------------------------------------------------------------------- */
 

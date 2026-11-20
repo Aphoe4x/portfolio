@@ -1892,19 +1892,20 @@ body.is-locked {
   transform: none;
 }
 
-/* Skill cards slide in from the left as they come up the table */
+/* Skill cards drift in from the left, tied to the scroll (#skills) */
 
 .suit.reveal {
-  transform: translateX(-28px);
+  transform: translateX(var(--slide, -28px));
+  transition: opacity 0.7s var(--ease), transform 0.12s linear;
 }
 
 .suit.reveal.is-in {
-  transform: none;
+  transform: translateX(var(--slide, 0px));
 }
 
 /* The reveal rule wins on specificity, so re-assert the hover nudge */
 .suit.reveal.is-in:hover {
-  transform: translateY(-4px) translateX(-6px);
+  transform: translateY(-4px) translateX(calc(var(--slide, 0px) - 6px));
 }
 
 /* Work cards get dealt, not just faded in */
@@ -2212,6 +2213,10 @@ body.is-locked {
 
   .reveal {
     opacity: 1;
+    transform: none;
+  }
+
+  .suit.reveal {
     transform: none;
   }
 }
