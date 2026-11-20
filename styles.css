@@ -1892,6 +1892,21 @@ body.is-locked {
   transform: none;
 }
 
+/* Skill cards slide in from the left as they come up the table */
+
+.suit.reveal {
+  transform: translateX(-28px);
+}
+
+.suit.reveal.is-in {
+  transform: none;
+}
+
+/* The reveal rule wins on specificity, so re-assert the hover nudge */
+.suit.reveal.is-in:hover {
+  transform: translateY(-4px) translateX(-6px);
+}
+
 /* Work cards get dealt, not just faded in */
 
 .work-card.reveal {
