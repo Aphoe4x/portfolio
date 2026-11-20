@@ -1490,7 +1490,7 @@ button {
 }
 
 .suit:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px) translateX(-6px);
   border-color: var(--line-strong);
   box-shadow: 0 18px 32px -24px rgba(10, 10, 10, 0.4);
 }
