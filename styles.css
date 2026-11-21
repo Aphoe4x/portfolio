@@ -23,6 +23,8 @@
 
   --side-w: 264px;
   --pad-x: clamp(1.15rem, 4.5vw, 2.5rem);
+  /* Left edge of the text inside .pane, so the black bands can match it. */
+  --pane-pad: max(var(--pad-x), calc((100% - 1220px) / 2 + var(--pad-x)));
   --radius: 16px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -357,9 +359,10 @@ button {
   display: contents;
 }
 
+/* The black band stays full width, but its text lines up with the content
+   column instead of hugging the screen edge. */
 .side-head {
-  max-width: 34rem;
-  padding: 1.5rem var(--pad-x) 1rem;
+  padding: 1.5rem var(--pane-pad) 1rem;
   background: var(--ink);
   color: var(--white);
 }
@@ -389,7 +392,7 @@ button {
 
 .side-connect {
   margin-top: 0;
-  padding: 1rem var(--pad-x) 1.35rem;
+  padding: 1rem var(--pane-pad) 1.35rem;
   background: var(--ink);
   color: var(--white);
 }
