@@ -22,7 +22,7 @@
   --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --side-w: 264px;
-  --pad-x: clamp(1.25rem, 4vw, 3.75rem);
+  --pad-x: clamp(1.15rem, 4.5vw, 2.5rem);
   --radius: 16px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -349,6 +349,62 @@ button {
   padding-top: 0.5rem;
 }
 
+/* --------------------------------------------------------------------------
+   Top sidebar layout, used on every screen
+   -------------------------------------------------------------------------- */
+
+.side {
+  display: contents;
+}
+
+.side-head {
+  max-width: 34rem;
+  padding: 1.5rem var(--pad-x) 1rem;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.side-tile {
+  display: none;
+}
+
+/* The rail is a direct child of the page, so it can stick to the top for the
+   whole scroll instead of only while the header block is on screen. */
+.rail {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.15rem;
+  width: auto;
+  margin: 0 var(--pad-x);
+  padding: 0.35rem;
+}
+
+.rail-item {
+  padding: 0.55rem 0.6rem;
+  font-size: 0.68rem;
+}
+
+.side-connect {
+  margin-top: 0;
+  padding: 1rem var(--pad-x) 1.35rem;
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* The header bands are black blocks now, so the gaps around the stuck rail
+   read as part of the same band. */
+body {
+  background: var(--ink);
+}
+
+/* Anchored sections would land under the stuck rail without this. */
+html {
+  scroll-padding-top: 6rem;
+}
+
 .side-label {
   margin: 0 0 0.7rem;
   font-family: var(--font-mono);
@@ -390,7 +446,7 @@ button {
    -------------------------------------------------------------------------- */
 
 .main {
-  margin-left: var(--side-w);
+  margin-left: 0;
   min-height: 100vh;
   background: var(--paper);
 }
@@ -1965,67 +2021,6 @@ body.is-locked {
 }
 
 @media (max-width: 940px) {
-  :root {
-    --pad-x: clamp(1.15rem, 4.5vw, 2.5rem);
-  }
-
-  .side {
-    display: contents;
-  }
-
-  .side-head {
-    max-width: 34rem;
-    padding: 1.5rem var(--pad-x) 1rem;
-    background: var(--ink);
-    color: var(--white);
-  }
-
-  .side-tile {
-    display: none;
-  }
-
-  /* The rail is a direct child of the page here, so it can stick to the
-     top of the screen for the whole scroll instead of only while the
-     header block is on screen. */
-  .rail {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.15rem;
-    width: auto;
-    margin: 0 var(--pad-x);
-    padding: 0.35rem;
-  }
-
-  .rail-item {
-    padding: 0.55rem 0.6rem;
-    font-size: 0.68rem;
-  }
-
-  .side-connect {
-    margin-top: 0;
-    padding: 1rem var(--pad-x) 1.35rem;
-    background: var(--ink);
-    color: var(--white);
-  }
-
-  /* The header bands are black blocks now, so the gaps around the stuck
-     rail read as part of the same band. */
-  body {
-    background: var(--ink);
-  }
-
-  /* Anchored sections would land under the stuck rail without this. */
-  html {
-    scroll-padding-top: 6rem;
-  }
-
-  .main {
-    margin-left: 0;
-  }
-
   .hero {
     min-height: 0;
     padding-top: 2.25rem;
@@ -2189,12 +2184,6 @@ body.is-locked {
 
   .eyebrow {
     font-size: 0.55rem;
-  }
-}
-
-@media (max-height: 780px) and (min-width: 941px) {
-  .side-tile {
-    display: none;
   }
 }
 
