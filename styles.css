@@ -225,8 +225,8 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
-  height: 158px;
+  gap: 0.6rem;
+  height: 118px;
   border-radius: 14px;
   background:
     radial-gradient(120% 100% at 50% 0%, rgba(230, 165, 50, 0.16) 0%, transparent 62%),
@@ -268,62 +268,19 @@ button {
   color: rgba(255, 255, 255, 0.42);
 }
 
-/* Mini hand, used in the sidebar and on the wide card */
+/* Suit marks in the availability tile */
 
-.mini-hand {
-  position: relative;
-  display: block;
-  width: 132px;
-  height: 86px;
-}
-
-.mini-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 76px;
-  margin: -38px 0 0 -27px;
-  border-radius: 6px;
-  background: linear-gradient(160deg, #ffffff 0%, #f4f4f2 100%);
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 600;
+.tile-suits {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
   line-height: 1;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
-  transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg));
+  color: rgba(255, 255, 255, 0.72);
 }
 
-.mini-card::after {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(10, 10, 10, 0.1);
-  border-radius: 3px;
-}
-
-.mini-card.is-amber {
-  background: linear-gradient(160deg, #f6d28a 0%, var(--accent) 100%);
-  box-shadow: 0 12px 26px rgba(230, 165, 50, 0.34);
-}
-
-.mini-card.is-amber::after {
-  border-color: rgba(10, 10, 10, 0.18);
-}
-
-.mini-hand--lg .mini-card {
-  width: 58px;
-  height: 82px;
-  margin: -41px 0 0 -29px;
-  font-size: 1.45rem;
-  transition: transform 0.6s var(--ease);
-}
-
-.card-hit:hover .mini-hand--lg .mini-card {
-  transform: translate(calc(var(--x) * 1.16), calc(var(--y) - 6px)) rotate(calc(var(--r) * 1.2));
+.tile-suits .is-amber {
+  color: var(--accent);
 }
 
 /* Rail */
