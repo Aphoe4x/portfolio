@@ -44,6 +44,18 @@
 
     layOutFan(0);
 
+    /* Touch and pen taps get the same lift as a hover. */
+    fanCards.forEach(function (card) {
+      card.addEventListener('pointerdown', function (event) {
+        if (event.pointerType === 'mouse') return;
+        card.classList.add('is-tapped');
+        window.clearTimeout(card.__tapTimer);
+        card.__tapTimer = window.setTimeout(function () {
+          card.classList.remove('is-tapped');
+        }, 700);
+      });
+    });
+
     if (finePointer && !reduceMotion) {
       var hero = document.querySelector('.hero');
 

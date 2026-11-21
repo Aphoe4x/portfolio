@@ -40,7 +40,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <script src="main.js" defer></script>
 </head>
@@ -143,14 +143,24 @@
         </div>
 
         <figure class="hero-hand reveal" style="--i: 3">
-          <div class="fan" id="fan" aria-hidden="true">
-            <span class="fan-card" style="--i: 0" data-corner="A♠"><span class="fan-face"><b>A</b><i>♠</i></span></span>
-            <span class="fan-card" style="--i: 1" data-corner="P♥"><span class="fan-face"><b>P</b><i>♥</i></span></span>
-            <span class="fan-card" style="--i: 2" data-corner="H♦"><span class="fan-face"><b>H</b><i>♦</i></span></span>
-            <span class="fan-card" style="--i: 3" data-corner="O♣"><span class="fan-face"><b>O</b><i>♣</i></span></span>
-            <span class="fan-card is-wild" style="--i: 4" data-corner="E★"><span class="fan-face"><b>E</b><i>★</i></span></span>
+          <div class="fan" id="fan" role="group" aria-label="Five shipped projects">
+            <a class="fan-card" href="#project-ziki" aria-label="Ziki, jump to project" style="--i: 0" data-corner="01">
+              <span class="fan-face"><span class="fan-suit" aria-hidden="true">♥</span><span class="fan-name">Ziki</span></span>
+            </a>
+            <a class="fan-card is-wild" href="#project-whot" aria-label="Whot, jump to project" style="--i: 1" data-corner="02">
+              <span class="fan-face"><span class="fan-suit" aria-hidden="true">★</span><span class="fan-name">Whot</span></span>
+            </a>
+            <a class="fan-card" href="#project-shop" aria-label="Shop website, jump to project" style="--i: 2" data-corner="03">
+              <span class="fan-face"><span class="fan-suit" aria-hidden="true">♦</span><span class="fan-name">Shop</span></span>
+            </a>
+            <a class="fan-card" href="#project-book" aria-label="Book with Aphoe, jump to project" style="--i: 3" data-corner="04">
+              <span class="fan-face"><span class="fan-suit" aria-hidden="true">♣</span><span class="fan-name">Book</span></span>
+            </a>
+            <a class="fan-card" href="#project-todo" aria-label="Todo List, jump to project" style="--i: 4" data-corner="05">
+              <span class="fan-face"><span class="fan-suit" aria-hidden="true">♠</span><span class="fan-name">Todo</span></span>
+            </a>
           </div>
-          <figcaption class="hand-caption">five cards, every one a thing I shipped</figcaption>
+          <figcaption class="hand-caption">five cards, five things I shipped</figcaption>
         </figure>
       </div>
 
@@ -198,7 +208,7 @@
       </div>
 
       <div class="work-grid">
-        <article class="work-card work-card--wide reveal" style="--i: 0">
+        <article class="work-card work-card--wide reveal" id="project-ziki" style="--i: 0">
           <div class="card-tilt">
             <div class="flip-inner">
               <div class="flip-face flip-front">
@@ -244,7 +254,7 @@
           </div>
         </article>
 
-        <article class="work-card reveal" style="--i: 1">
+        <article class="work-card reveal" id="project-whot" style="--i: 1">
           <div class="card-tilt">
             <div class="flip-inner">
               <div class="flip-face flip-front">
@@ -282,7 +292,7 @@
           </div>
         </article>
 
-        <article class="work-card reveal" style="--i: 2">
+        <article class="work-card reveal" id="project-shop" style="--i: 2">
           <div class="card-tilt">
             <div class="flip-inner">
               <div class="flip-face flip-front">
@@ -320,7 +330,7 @@
           </div>
         </article>
 
-        <article class="work-card reveal" style="--i: 3">
+        <article class="work-card reveal" id="project-book" style="--i: 3">
           <div class="card-tilt">
             <div class="flip-inner">
               <div class="flip-face flip-front">
@@ -358,7 +368,7 @@
           </div>
         </article>
 
-        <article class="work-card reveal" style="--i: 4">
+        <article class="work-card reveal" id="project-todo" style="--i: 4">
           <div class="card-tilt">
             <div class="flip-inner">
               <div class="flip-face flip-front">
