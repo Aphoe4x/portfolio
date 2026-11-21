@@ -2218,6 +2218,27 @@ body.is-locked {
 }
 
 /* --------------------------------------------------------------------------
+   Desktop heading sizes and pane-width nav
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 941px) {
+  .rail {
+    width: min(1220px, 100%);
+    margin-inline: auto;
+    padding-left: var(--pad-x);
+    padding-right: var(--pad-x);
+  }
+
+  .mega {
+    font-size: clamp(2rem, 4.4vw, 4rem);
+  }
+
+  .hero-name {
+    font-size: clamp(3.25rem, 6.25vw, 5.75rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
    Reduced motion
    -------------------------------------------------------------------------- */
 
